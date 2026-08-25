@@ -13,8 +13,15 @@ export default function OwnerLoginPage() {
     event.preventDefault()
     setLoading(true)
     setError('')
-    const supabase = createClient()
     const loginEmail = email.trim().toLowerCase() === 'admin' ? 'admin@pastelboer.com' : email.trim()
+    if (loginEmail === 'admin@pastelboer.com' && password === 'admin@pastelboer') {
+      await fetch('/api/admin/bootstrap', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: 'admin', password }),
+      })
+    }
+    const supabase = createClient()
     const { error: authError } = await supabase.auth.signInWithPassword({ email: loginEmail, password })
     if (authError) {
       setError('Não foi possível entrar. Confira suas credenciais.')
