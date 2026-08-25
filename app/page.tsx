@@ -1,47 +1,69 @@
+'use client'
+
+import { useMemo, useState } from 'react'
+import { ArrowRight, Check, ChevronDown, Clock3, MapPin, Minus, Plus, ShoppingBag, Sparkles, Star, UtensilsCrossed } from 'lucide-react'
+
+type Product = { id: number; name: string; description: string; price: number; category: string; badge?: string; color: string }
+type CartItem = Product & { quantity: number }
+
+const products: Product[] = [
+  { id: 1, name: 'Carne com queijo', description: 'Carne moída temperada, queijo derretido e azeitona.', price: 12.9, category: 'Pastéis', badge: 'O mais pedido', color: 'bg-[#F4C95D]' },
+  { id: 2, name: 'Frango cremoso', description: 'Frango desfiado, catupiry e um toque de milho.', price: 13.9, category: 'Pastéis', color: 'bg-[#E9825B]' },
+  { id: 3, name: 'Queijo com orégano', description: 'Queijo muçarela, orégano e aquele sabor clássico.', price: 10.9, category: 'Pastéis', color: 'bg-[#F3D9A4]' },
+  { id: 4, name: 'Palmito especial', description: 'Palmito, queijo, tomate e tempero da casa.', price: 13.9, category: 'Pastéis', color: 'bg-[#A7C7A0]' },
+  { id: 5, name: 'Pastel de chocolate', description: 'Chocolate cremoso, banana e açúcar com canela.', price: 11.9, category: 'Doces', badge: 'Novidade', color: 'bg-[#C98F76]' },
+  { id: 6, name: 'Caldo de cana', description: 'Cana fresquinha, servido gelado na hora.', price: 7.5, category: 'Bebidas', color: 'bg-[#B6D38A]' },
+]
+
+const money = (value: number) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+
 export default function Page() {
+  const [screen, setScreen] = useState<'home' | 'menu' | 'admin'>('home')
+  const [category, setCategory] = useState('Todos')
+  const [cart, setCart] = useState<CartItem[]>([])
+  const [orderSent, setOrderSent] = useState(false)
+  const [adminLogged, setAdminLogged] = useState(false)
+
+  const filtered = category === 'Todos' ? products : products.filter((product) => product.category === category)
+  const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart])
+  const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0)
+
+  function add(product: Product) {
+    setCart((items) => items.some((item) => item.id === product.id) ? items.map((item) => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item) : [...items, { ...product, quantity: 1 }])
+  }
+  function change(id: number, delta: number) {
+    setCart((items) => items.map((item) => item.id === id ? { ...item, quantity: item.quantity + delta } : item).filter((item) => item.quantity > 0))
+  }
+
+  if (screen === 'admin') return <Admin logged={adminLogged} onLogin={() => setAdminLogged(true)} onBack={() => setScreen('home')} />
+
   return (
-    <main
-      style={{
-        colorScheme: 'light dark',
-        position: 'relative',
-        display: 'flex',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'light-dark(#fff, #000)',
-        color: 'light-dark(#000, #fff)',
-      }}
-    >
-      <svg
-        aria-hidden="true"
-        style={{ width: 80, height: 80 }}
-        width={80}
-        height={80}
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: 'calc(50% + 56px)',
-          transform: 'translateX(-50%)',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          fontWeight: 500,
-          color: 'light-dark(#71717a, #a1a1aa)',
-        }}
-      >
-        Your v0 generation will show here.
-      </p>
+    <main className="min-h-screen bg-[#FBF8F1] text-[#24352B]">
+      <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+        <button className="flex items-center gap-3" onClick={() => setScreen('home')} aria-label="Voltar ao início"><span className="grid size-10 place-items-center rounded-full bg-[#E85D3F] text-white"><UtensilsCrossed size={20} /></span><span className="font-serif text-2xl font-bold tracking-tight">Pastel do Zé</span></button>
+        <nav className="hidden items-center gap-8 text-sm font-semibold lg:flex"><a href="#sobre">A casa</a><a href="#cardapio">Cardápio</a><a href="#contato">Contato</a><button onClick={() => setScreen('admin')} className="text-[#E85D3F]">Área do dono</button></nav>
+        <button onClick={() => setScreen('menu')} className="relative flex items-center gap-2 rounded-full bg-[#24352B] px-4 py-2.5 text-sm font-bold text-white"><ShoppingBag size={17} /> Pedir agora{itemCount > 0 && <span className="grid size-5 place-items-center rounded-full bg-[#F4C95D] text-xs text-[#24352B]">{itemCount}</span>}</button>
+      </header>
+
+      {screen === 'home' ? <>
+        <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 pb-20 pt-10 lg:grid-cols-[1.05fr_.95fr] lg:px-10 lg:pt-16">
+          <div><div className="mb-6 inline-flex items-center gap-2 rounded-full bg-[#F4C95D]/30 px-4 py-2 text-sm font-bold text-[#765D16]"><Sparkles size={15} /> Feito na hora, do jeitinho que você gosta</div><h1 className="max-w-2xl font-serif text-6xl font-bold leading-[.98] tracking-[-.04em] sm:text-7xl">O pastel mais <span className="text-[#E85D3F]">caprichado</span> da cidade.</h1><p className="mt-7 max-w-lg text-lg leading-8 text-[#627067]">Massa crocante, recheio de verdade e aquele molho especial que só a gente tem. Seu momento gostoso começa aqui.</p><div className="mt-8 flex flex-wrap items-center gap-4"><button onClick={() => setScreen('menu')} className="flex items-center gap-3 rounded-full bg-[#E85D3F] px-6 py-4 font-bold text-white shadow-lg shadow-[#E85D3F]/20 transition hover:-translate-y-0.5">Conheça nosso cardápio <ArrowRight size={18} /></button><div className="flex items-center gap-2 text-sm text-[#627067]"><span className="flex text-[#E85D3F]"><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /></span> 4.9 (320 avaliações)</div></div></div>
+          <div className="relative min-h-[430px] overflow-hidden rounded-[2.5rem] bg-[#F4C95D] p-8 shadow-xl shadow-[#24352B]/10"><div className="absolute -right-16 -top-16 size-64 rounded-full border-[24px] border-[#E85D3F]/20" /><div className="absolute bottom-8 left-8 z-10 max-w-xs rounded-3xl bg-[#FBF8F1] p-5 shadow-xl"><p className="font-serif text-xl font-bold">“Crocante, quentinho e muito recheado!”</p><p className="mt-3 text-sm text-[#627067]">— Marina, cliente desde 2018</p></div><div className="relative grid h-full min-h-[350px] place-items-center"><div className="grid size-64 rotate-[-8deg] place-items-center rounded-[45%] bg-[#E85D3F] shadow-2xl shadow-[#9b321f]/30"><div className="h-8 w-44 rotate-12 rounded-full bg-[#F4C95D]/80" /><div className="absolute h-5 w-24 translate-x-8 translate-y-8 rotate-[-18deg] rounded-full bg-[#F4C95D]/80" /></div><span className="absolute bottom-2 right-4 rotate-6 font-serif text-5xl font-bold text-[#24352B]/80">hmmm!</span></div></div>
+        </section>
+        <section id="sobre" className="border-y border-[#DDE4D9] bg-[#EAF0E5] px-6 py-16"><div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-3"><div><p className="mb-3 text-sm font-bold uppercase tracking-[.2em] text-[#E85D3F]">Desde 1998</p><h2 className="font-serif text-4xl font-bold">Tem gosto de história.</h2></div><p className="leading-8 text-[#627067]">O Pastel do Zé nasceu pequeno, com uma barraca e uma receita de família. Hoje a gente cresceu, mas continua com o mesmo cuidado: ingredientes frescos, recheio generoso e conversa boa no balcão.</p><div className="flex items-center gap-4"><div className="grid size-14 place-items-center rounded-2xl bg-[#F4C95D] text-2xl">♥</div><div><p className="font-bold">Feito com carinho</p><p className="text-sm text-[#627067]">E uma pitada de tradição</p></div></div></div></section>
+        <section id="contato" className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-16 sm:flex-row sm:items-center sm:justify-between lg:px-10"><div><p className="mb-2 text-sm font-bold uppercase tracking-[.2em] text-[#E85D3F]">Vem visitar</p><h2 className="font-serif text-3xl font-bold">A gente está te esperando.</h2></div><div className="flex flex-col gap-3 text-sm text-[#627067] sm:flex-row sm:gap-8"><span className="flex items-center gap-2"><MapPin size={18} className="text-[#E85D3F]" /> Rua das Flores, 120 — Centro</span><span className="flex items-center gap-2"><Clock3 size={18} className="text-[#E85D3F]" /> Ter–Dom, 11h às 22h</span></div></section>
+      </> : <Menu cart={cart} total={total} filtered={filtered} category={category} setCategory={setCategory} add={add} change={change} itemCount={itemCount} onBack={() => setScreen('home')} onFinish={() => setOrderSent(true)} orderSent={orderSent} />}
     </main>
   )
 }
+
+function Menu({ cart, total, filtered, category, setCategory, add, change, itemCount, onBack, onFinish, orderSent }: any) {
+  const categories = ['Todos', 'Pastéis', 'Doces', 'Bebidas']
+  return <section className="mx-auto max-w-7xl px-6 pb-20 pt-10 lg:px-10"><div className="flex flex-wrap items-end justify-between gap-6"><div><button onClick={onBack} className="mb-6 text-sm font-bold text-[#E85D3F]">← Voltar para a casa</button><p className="text-sm font-bold uppercase tracking-[.2em] text-[#E85D3F]">Cardápio</p><h1 className="mt-2 font-serif text-5xl font-bold tracking-tight">Escolha o seu favorito.</h1></div><div className="flex gap-2 rounded-full bg-[#EAF0E5] p-1">{categories.map((item) => <button key={item} onClick={() => setCategory(item)} className={`rounded-full px-4 py-2 text-sm font-bold ${category === item ? 'bg-[#24352B] text-white' : 'text-[#627067]'}`}>{item}</button>)}</div></div><div className="mt-10 grid gap-8 lg:grid-cols-[1fr_350px]"><div className="grid gap-4 sm:grid-cols-2">{filtered.map((product: Product) => <article key={product.id} className="group rounded-3xl border border-[#DDE4D9] bg-white p-3 transition hover:-translate-y-1 hover:shadow-xl"><div className={`relative grid h-40 place-items-center overflow-hidden rounded-2xl ${product.color}`}><div className="h-20 w-36 rotate-[-8deg] rounded-[45%] bg-[#E85D3F] shadow-xl" /><span className="absolute right-3 top-3 rounded-full bg-white/80 px-3 py-1 text-xs font-bold">{product.badge || product.category}</span></div><div className="p-4"><div className="flex items-start justify-between gap-3"><h3 className="font-serif text-xl font-bold">{product.name}</h3><span className="font-bold text-[#E85D3F]">{money(product.price)}</span></div><p className="mt-2 min-h-12 text-sm leading-6 text-[#627067]">{product.description}</p><button onClick={() => add(product)} className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#EAF0E5] py-3 text-sm font-bold transition hover:bg-[#F4C95D]"><Plus size={16} /> Adicionar</button></div></article>)}</div><aside className="h-fit rounded-3xl bg-[#24352B] p-6 text-white lg:sticky lg:top-5"><div className="flex items-center justify-between"><h2 className="font-serif text-2xl font-bold">Seu pedido</h2><ShoppingBag size={20} className="text-[#F4C95D]" /></div>{cart.length === 0 ? <div className="py-12 text-center text-sm text-white/60">Seu carrinho está vazio.<br />Escolha algo bem gostoso!</div> : <div className="mt-6 space-y-4">{cart.map((item: CartItem) => <div key={item.id} className="flex items-center justify-between gap-3 border-b border-white/10 pb-4"><div><p className="font-bold">{item.name}</p><p className="text-sm text-white/60">{money(item.price * item.quantity)}</p></div><div className="flex items-center gap-2 rounded-full bg-white/10 p-1"><button aria-label={`Remover ${item.name}`} onClick={() => change(item.id, -1)} className="grid size-7 place-items-center rounded-full hover:bg-white/10"><Minus size={14} /></button><span className="w-4 text-center text-sm">{item.quantity}</span><button aria-label={`Adicionar ${item.name}`} onClick={() => change(item.id, 1)} className="grid size-7 place-items-center rounded-full hover:bg-white/10"><Plus size={14} /></button></div></div>)}<div className="flex justify-between pt-2 text-lg font-bold"><span>Total</span><span className="text-[#F4C95D]">{money(total)}</span></div><button onClick={onFinish} className="w-full rounded-xl bg-[#E85D3F] py-4 font-bold text-white hover:bg-[#f17155]">Finalizar pedido</button></div>}{orderSent && <div className="mt-4 flex items-start gap-3 rounded-2xl bg-[#A7C7A0] p-4 text-sm font-bold text-[#24352B]"><Check size={18} /> Pedido enviado! A cozinha já está preparando.</div>}</aside></div></section>
+}
+
+function Admin({ logged, onLogin, onBack }: { logged: boolean; onLogin: () => void; onBack: () => void }) {
+  if (!logged) return <div className="grid min-h-screen place-items-center bg-[#EAF0E5] px-6"><div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-xl"><button onClick={onBack} className="text-sm font-bold text-[#E85D3F]">← Voltar ao site</button><div className="mt-10"><div className="grid size-12 place-items-center rounded-2xl bg-[#24352B] text-white"><UtensilsCrossed size={22} /></div><h1 className="mt-6 font-serif text-4xl font-bold">Área do dono</h1><p className="mt-2 text-[#627067]">Entre para acompanhar os pedidos da casa.</p></div><label className="mt-8 block text-sm font-bold">E-mail<input className="mt-2 w-full rounded-xl border border-[#DDE4D9] px-4 py-3 outline-none focus:border-[#E85D3F]" type="email" placeholder="dono@pasteldoze.com" /></label><label className="mt-4 block text-sm font-bold">Senha<input className="mt-2 w-full rounded-xl border border-[#DDE4D9] px-4 py-3 outline-none focus:border-[#E85D3F]" type="password" placeholder="••••••••" /></label><button onClick={onLogin} className="mt-6 w-full rounded-xl bg-[#E85D3F] py-4 font-bold text-white">Entrar no painel</button><p className="mt-4 text-center text-xs text-[#627067]">A autenticação será conectada ao Supabase.</p></div></div>
+  return <div className="min-h-screen bg-[#F5F7F2] px-6 py-8 lg:px-10"><header className="mx-auto flex max-w-7xl items-center justify-between"><button onClick={onBack} className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-full bg-[#E85D3F] text-white"><UtensilsCrossed size={20} /></span><span className="font-serif text-2xl font-bold">Pastel do Zé</span></button><span className="rounded-full bg-[#A7C7A0] px-4 py-2 text-sm font-bold">Loja aberta</span></header><main className="mx-auto max-w-7xl py-12"><div className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-sm font-bold uppercase tracking-[.2em] text-[#E85D3F]">Painel de pedidos</p><h1 className="mt-2 font-serif text-5xl font-bold">Boa tarde, Zé.</h1></div><button className="rounded-xl border border-[#DDE4D9] bg-white px-4 py-3 text-sm font-bold">Hoje, 24 de junho <ChevronDown size={16} className="ml-2 inline" /></button></div><div className="mt-10 grid gap-4 md:grid-cols-3"><Stat label="Pedidos hoje" value="18" note="+12% vs. ontem" /><Stat label="Em preparo" value="04" note="Atenção agora" /><Stat label="Faturamento" value="R$ 486,70" note="Ticket médio R$ 27,04" /></div><section className="mt-8 overflow-hidden rounded-3xl border border-[#DDE4D9] bg-white"><div className="flex items-center justify-between border-b border-[#DDE4D9] px-6 py-5"><h2 className="font-serif text-2xl font-bold">Pedidos recentes</h2><span className="rounded-full bg-[#F4C95D]/40 px-3 py-1 text-xs font-bold text-[#765D16]">Atualização em tempo real</span></div>{[['#1042','Marina Oliveira','Carne com queijo + 1','R$ 25,80','Em preparo'],['#1041','Carlos Henrique','Frango cremoso + Caldo de cana','R$ 21,40','Recebido'],['#1040','Bia Santos','Queijo com orégano + 2','R$ 32,70','Pronto']].map(([id,name,items,price,status]) => <div key={id} className="flex flex-wrap items-center justify-between gap-4 border-b border-[#DDE4D9] px-6 py-5 last:border-0"><div><p className="font-bold">Pedido {id} <span className="ml-2 font-normal text-[#627067]">• há 4 min</span></p><p className="mt-1 text-sm text-[#627067]">{name} · {items}</p></div><div className="flex items-center gap-6"><span className="font-bold">{price}</span><span className={`rounded-full px-3 py-1 text-xs font-bold ${status === 'Pronto' ? 'bg-[#A7C7A0]' : status === 'Em preparo' ? 'bg-[#F4C95D]' : 'bg-[#EAF0E5]'}`}>{status}</span><button className="text-sm font-bold text-[#E85D3F]">Ver pedido</button></div></div>)}</section></main></div>
+}
+function Stat({ label, value, note }: { label: string; value: string; note: string }) { return <div className="rounded-3xl border border-[#DDE4D9] bg-white p-6"><p className="text-sm text-[#627067]">{label}</p><p className="mt-2 font-serif text-4xl font-bold">{value}</p><p className="mt-3 text-xs font-bold text-[#E85D3F]">{note}</p></div> }
