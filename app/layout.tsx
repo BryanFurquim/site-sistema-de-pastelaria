@@ -7,8 +7,8 @@ const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' })
 const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces' })
 
 export const metadata: Metadata = {
-  title: 'Pastel do Zé | O pastel mais caprichado da cidade',
-  description: 'Pastéis crocantes, recheio generoso e sabor de tradição. Peça online ou venha visitar o Pastel do Zé.',
+  title: 'Pastel Boer | Uma delícia de pastel',
+  description: 'Pastéis crocantes, recheio generoso e sabor de tradição. Peça online ou visite o Pastel Boer em Americana - SP.',
   generator: 'v0.app',
 }
 
