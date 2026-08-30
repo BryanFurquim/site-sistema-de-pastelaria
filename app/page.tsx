@@ -27,6 +27,7 @@ export default function Page() {
   const [customerPhone, setCustomerPhone] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [orderNumber, setOrderNumber] = useState<number | null>(null)
   const priceByName = Object.fromEntries(products.map(([name, , price]) => [name, Number(price.replace('R$ ', '').replace(',', '.'))]))
   const total = useMemo(() => cart.reduce((sum, name) => sum + (priceByName[name] || 0), 0), [cart])
   const addToCart = (name: string) => setCart((current) => [...current, name])
@@ -74,10 +75,12 @@ export default function Page() {
     setSubmitting(true)
     const supabase = createClient()
     const items = Object.entries(cart.reduce<Record<string, number>>((acc, name) => ({ ...acc, [name]: (acc[name] || 0) + 1 }), {})).map(([name, quantity]) => ({ name, quantity, unit_price: priceByName[name] }))
-    const { error } = await supabase.from('orders').insert({ customer_name: customerName.trim(), customer_phone: customerPhone.trim(), items, total })
+    const { data, error } = await supabase.from('orders').insert({ customer_name: customerName.trim(), customer_phone: customerPhone.trim(), items, total }).select('order_number').single()
     setSubmitting(false)
-    if (!error) { setSubmitted(true); setCart([]) }
+    if (!error) { setOrderNumber(data?.order_number ?? null); setSubmitted(true); setCheckout(false); setCart([]) }
   }
+  if (submitted) return <main className="flex min-h-screen items-center justify-center bg-[#FBF8F1] px-6 py-12 text-[#24352B]"><section className="w-full max-w-xl rounded-[2rem] border border-[#DDE4D9] bg-white p-8 text-center shadow-xl sm:p-12"><div className="mx-auto grid size-20 place-items-center rounded-full bg-[#F4C95D]/50 text-4xl">✓</div><p className="mt-7 text-sm font-bold uppercase tracking-[.2em] text-[#E85D3F]">Pedido recebido</p><h1 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">Obrigado pelo seu pedido.</h1><p className="mt-5 leading-7 text-[#627067]">Já recebemos sua solicitação e vamos preparar tudo com muito carinho.</p>{orderNumber && <p className="mt-6 rounded-2xl bg-[#EAF0E5] px-4 py-3 font-bold">Pedido #{String(orderNumber).padStart(5, '0')}</p>}<button type="button" onClick={() => { setSubmitted(false); setMenu(true); setCustomerName(''); setCustomerPhone(''); setOrderNumber(null) }} className="mt-8 w-full rounded-full bg-[#E85D3F] px-6 py-4 font-bold text-white">Fazer novo pedido</button></section></main>
+  if (checkout) return <main className="min-h-screen bg-[#FBF8F1] px-6 py-10 text-[#24352B]"><section className="mx-auto flex min-h-[80vh] w-full max-w-xl flex-col justify-center"><button type="button" onClick={() => setCheckout(false)} className="mb-8 self-start font-bold text-[#E85D3F]">← Voltar ao carrinho</button><p className="text-sm font-bold uppercase tracking-[.2em] text-[#E85D3F]">Finalizar pedido</p><h1 className="mt-3 font-serif text-5xl font-bold">Só falta identificar você.</h1><p className="mt-4 leading-7 text-[#627067]">Preencha seus dados para enviarmos o pedido para a cozinha.</p><form onSubmit={submitOrder} className="mt-10 flex flex-col gap-5"><label className="flex flex-col gap-2 font-bold">Nome<input required value={customerName} onChange={(event) => setCustomerName(event.target.value)} className="rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal outline-none focus:border-[#E85D3F]" placeholder="Seu nome" /></label><label className="flex flex-col gap-2 font-bold">Telefone<input required value={customerPhone} onChange={(event) => setCustomerPhone(event.target.value)} className="rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal outline-none focus:border-[#E85D3F]" placeholder="(19) 99999-9999" /></label><button disabled={submitting} className="mt-3 rounded-full bg-[#24352B] px-6 py-4 font-bold text-white disabled:opacity-60">{submitting ? 'Enviando pedido...' : 'Confirmar pedido'}</button></form></section></main>
   return <main className="min-h-screen bg-[#FBF8F1] text-[#24352B]">
     <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
       <a href="#inicio" className="flex items-center gap-3"><span className="grid size-14 overflow-hidden rounded-2xl bg-white"><img src="/pastel-boer-logo.png" alt="Logo Pastel Boer" className="h-full w-full object-contain" /></span><span className="font-serif text-2xl font-bold">Pastel Boer</span></a>
