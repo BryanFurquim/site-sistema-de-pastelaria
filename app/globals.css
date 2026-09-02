@@ -176,7 +176,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero-pastel-float { animation: hero-float 4s ease-in-out 700ms infinite; }
+  .hero-pastel-float { animation: hero-float 4s ease-in-out 320ms infinite; }
 }
 
 @keyframes success-pop {
