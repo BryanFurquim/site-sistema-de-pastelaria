@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   generator: 'v0.app',
 }
 
-export const viewport: Viewport = { colorScheme: 'light', themeColor: '#FBF8F1' }
+export const viewport: Viewport = { colorScheme: 'light', themeColor: '#FFF4C2' }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR" className="bg-[#FBF8F1]"><body className={`${dmSans.variable} ${fraunces.variable} font-sans antialiased`}>{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return <html lang="pt-BR" className="bg-[#FFF4C2]"><body className={`${dmSans.variable} ${fraunces.variable} font-sans antialiased`}>{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
 }
