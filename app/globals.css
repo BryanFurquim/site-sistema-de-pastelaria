@@ -179,6 +179,37 @@
   .hero-pastel-float { animation: hero-float 4s ease-in-out 700ms infinite; }
 }
 
+@keyframes success-pop {
+  0% { opacity: 0; transform: scale(.55) rotate(-12deg); }
+  70% { transform: scale(1.12) rotate(4deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes success-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes confetti-fall {
+  from { opacity: 0; transform: translateY(-30vh) rotate(0); }
+  15% { opacity: 1; }
+  to { opacity: 0; transform: translateY(110vh) rotate(540deg); }
+}
+
+.success-check { animation: success-pop 700ms cubic-bezier(.2,.8,.2,1) both; }
+.success-card > :not(.success-check) { animation: success-rise 650ms ease-out 180ms both; }
+.success-confetti { pointer-events: none; position: absolute; inset: 0; overflow: hidden; }
+.success-confetti i { position: absolute; top: -10%; width: 10px; height: 30px; border-radius: 999px; animation: confetti-fall 3.6s linear infinite; }
+.success-confetti i:nth-child(1) { left: 12%; background: #D92D20; animation-delay: .1s; }
+.success-confetti i:nth-child(2) { left: 28%; background: #F5C518; animation-delay: .8s; }
+.success-confetti i:nth-child(3) { left: 47%; background: #FFF4C2; animation-delay: 1.4s; }
+.success-confetti i:nth-child(4) { left: 66%; background: #D92D20; animation-delay: .5s; }
+.success-confetti i:nth-child(5) { left: 82%; background: #F5C518; animation-delay: 1.8s; }
+.success-confetti i:nth-child(6) { left: 92%; background: #FFF4C2; animation-delay: 2.1s; }
+@media (prefers-reduced-motion: reduce) {
+  .success-check, .success-card > :not(.success-check), .success-confetti i { animation: none; }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
