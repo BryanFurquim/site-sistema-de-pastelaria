@@ -26,6 +26,12 @@ export default function Page() {
     { name: 'Carne', description: 'Carne bem temperada, douradinha e cheia de sabor.', image: '/products/hero-carne.png', color: '#F5C518' },
     { name: 'Frango', description: 'Frango cremoso com milho e queijo derretido.', image: '/products/hero-frango.png', color: '#F5C518' },
     { name: 'Pizza', description: 'Queijo, presunto e tomate dentro de uma massa crocante.', image: '/products/hero-presunto.png', color: '#F5C518' },
+    { name: 'Calabresa com Cheddar', description: 'Calabresa fatiada com cheddar cremoso.', image: '/products/pastel-calabresa.png', color: '#F5C518' },
+    { name: 'Queijo com Bacon', description: 'Queijo derretido com bacon crocante.', image: '/products/pastel-pizza-bacon.png', color: '#F5C518' },
+    { name: 'Palmito com Queijo', description: 'Palmito cremoso com queijo derretido.', image: '/products/pastel-palmito-bacon-queijo.png', color: '#F5C518' },
+    { name: 'Brócolis com Queijo e Bacon', description: 'Brócolis, queijo e bacon em uma combinação especial.', image: '/products/pastel-brocolis.png', color: '#F5C518' },
+    { name: 'Batata com Cheddar e Bacon', description: 'Porção de batatas com cheddar e bacon crocante.', image: '/products/porcao-fritas-cheddar-bacon.png', color: '#F5C518' },
+    { name: 'Anéis de Cebola com Cheddar e Bacon', description: 'Anéis crocantes cobertos com cheddar e bacon.', image: '/products/porcao-aneis-cebola.png', color: '#F5C518' },
   ]
   const currentHero = heroSlides[heroFlavor]
   const [activeSavory, setActiveSavory] = useState('Carne')
