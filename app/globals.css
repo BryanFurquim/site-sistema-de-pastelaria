@@ -183,7 +183,7 @@
 }
 
 @keyframes hero-carousel-float-mobile {
-  0% { opacity: 0; transform: translateY(-50%) translateX(calc(-50% + 18px)) rotate(7deg) scale(.9); }
+  0% { opacity: 0; transform: translateY(-50%) translateX(calc(-50% + 10px)) rotate(7deg) scale(.9); }
   18% { opacity: 1; transform: translateY(calc(-50% - 5px)) translateX(-50%) rotate(-7deg) scale(1); }
   50% { transform: translateY(calc(-50% - 13px)) translateX(-50%) rotate(-3deg) scale(1.015); }
   78% { transform: translateY(calc(-50% - 5px)) translateX(-50%) rotate(-7deg) scale(1); }
