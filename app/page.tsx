@@ -25,7 +25,7 @@ export default function Page() {
     { name: 'Sensação', description: 'Chocolate cremoso com morangos frescos em cada mordida.', image: '/products/hero-chocolate.png', color: '#F5C518' },
     { name: 'Carne', description: 'Carne bem temperada, douradinha e cheia de sabor.', image: '/products/hero-carne.png', color: '#F5C518' },
     { name: 'Frango', description: 'Frango cremoso com milho e queijo derretido.', image: '/products/hero-frango.png', color: '#F5C518' },
-    { name: 'Presunto', description: 'Presunto e queijo derretidos dentro de uma massa crocante.', image: '/products/hero-presunto.png', color: '#F5C518' },
+    { name: 'Pizza', description: 'Queijo, presunto e tomate dentro de uma massa crocante.', image: '/products/hero-presunto.png', color: '#F5C518' },
   ]
   const currentHero = heroSlides[heroFlavor]
   const [activeSavory, setActiveSavory] = useState('Carne')
