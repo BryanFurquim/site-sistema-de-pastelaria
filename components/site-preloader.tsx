@@ -27,16 +27,25 @@ export function SitePreloader() {
     ]))
     let loaded = 0
     let finished = false
+    let finishTimeout: number | undefined
+    const minimumVisibleTime = 3200
+    const startedAt = performance.now()
+
+    const finishLoader = () => {
+      if (finished) return
+      finished = true
+      gsap.timeline({ onComplete: () => { setReady(true) } })
+        .to(logo, { scale: 1.06, duration: 0.55, ease: 'back.out(1.7)' })
+        .to(root, { clipPath: 'inset(0 0 100% 0)', duration: 0.9, ease: 'power4.inOut' })
+    }
 
     const updateProgress = () => {
       loaded += 1
       const ratio = Math.min(loaded / imageSources.length, 1)
       gsap.to(progress, { width: `${Math.round(ratio * 100)}%`, duration: 0.22, ease: 'power2.out' })
       if (ratio === 1 && !finished) {
-        finished = true
-        gsap.timeline({ onComplete: () => { setReady(true) } })
-          .to(logo, { scale: 1.06, duration: 0.35, ease: 'back.out(1.7)' })
-          .to(root, { clipPath: 'inset(0 0 100% 0)', duration: 0.7, ease: 'power4.inOut' })
+        const remainingTime = Math.max(0, minimumVisibleTime - (performance.now() - startedAt))
+        finishTimeout = window.setTimeout(finishLoader, remainingTime)
       }
     }
 
@@ -56,7 +65,10 @@ export function SitePreloader() {
       if (!finished && imageSources.length === 0) updateProgress()
     }, 900)
 
-    return () => window.clearTimeout(minimum)
+    return () => {
+      window.clearTimeout(minimum)
+      if (finishTimeout) window.clearTimeout(finishTimeout)
+    }
   }, [])
 
   if (ready) return null
