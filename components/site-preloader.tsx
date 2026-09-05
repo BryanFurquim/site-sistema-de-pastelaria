@@ -28,7 +28,7 @@ export function SitePreloader() {
     let loaded = 0
     let finished = false
     let finishTimeout: number | undefined
-    const minimumVisibleTime = 3200
+    const minimumVisibleTime = 5000
     const startedAt = performance.now()
 
     const finishLoader = () => {
@@ -77,9 +77,9 @@ export function SitePreloader() {
     <div ref={rootRef} className="site-preloader" role="status" aria-live="polite" aria-label="Carregando o cardápio">
       <div className="site-preloader-inner">
         <img ref={logoRef} src="/pastel-boer-logo.png" alt="Pastel Boer" className="site-preloader-logo" />
-        <p className="site-preloader-kicker">Pastel fresquinho chegando</p>
+        <p className="site-preloader-kicker">Carregando sua página</p>
         <div className="site-preloader-track" aria-hidden="true"><span ref={progressRef} /></div>
-        <p className="site-preloader-percent">Preparando seu pedido <span>•</span></p>
+        <p className="site-preloader-percent">Bom apetite! <span>•</span></p>
       </div>
     </div>
   )
