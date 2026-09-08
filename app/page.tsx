@@ -1,11 +1,11 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { SitePreloader } from '@/components/site-preloader'
 import { ArrowRight, MapPin, ShoppingBag, Sparkles } from 'lucide-react'
 
-const products = [
+const defaultProducts = [
   ['Carne', 'Carne temperada.', 'R$ 12,00'], ['Carne c/Ovo', 'Carne e ovo.', 'R$ 13,00'], ['Carne c/Queijo', 'Carne e queijo.', 'R$ 13,00'], ['Carne c/Cheddar', 'Carne e cheddar.', 'R$ 13,00'], ['Carne c/Requeijão', 'Carne e requeijão.', 'R$ 13,00'], ['Carne c/Ovo e Queijo', 'Carne, ovo e queijo.', 'R$ 14,00'], ['Carne c/Bacon', 'Carne e bacon.', 'R$ 15,00'], ['Carne c/Bacon e Queijo', 'Carne, bacon e queijo.', 'R$ 17,00'], ['Carne c/Bacon e Requeijão', 'Carne, bacon e requeijão.', 'R$ 17,00'],
   ['Frango', 'Frango temperado.', 'R$ 12,00'], ['Frango c/Queijo', 'Frango e queijo.', 'R$ 13,00'], ['Frango c/Cheddar', 'Frango e cheddar.', 'R$ 13,00'], ['Frango c/Requeijão', 'Frango e requeijão.', 'R$ 13,00'], ['Frango c/Calabresa', 'Frango e calabresa.', 'R$ 13,00'], ['Frango c/Milho', 'Frango e milho.', 'R$ 13,00'], ['Frango c/Milho e Queijo', 'Frango, milho e queijo.', 'R$ 14,00'], ['Frango c/Bacon', 'Frango e bacon.', 'R$ 15,00'], ['Frango c/Bacon e Queijo', 'Frango, bacon e queijo.', 'R$ 17,00'], ['Frango c/Bacon e Requeijão', 'Frango, bacon e requeijão.', 'R$ 17,00'],
   ['Pizza', 'Queijo, presunto e tomate.', 'R$ 13,00'], ['Pizza c/Ovo', 'Pizza e ovo.', 'R$ 14,00'], ['Pizza c/Cheddar', 'Pizza e cheddar.', 'R$ 14,00'], ['Pizza c/Requeijão', 'Pizza e requeijão.', 'R$ 14,00'], ['Pizza c/Bacon', 'Pizza e bacon.', 'R$ 16,00'], ['Pizza c/Bacon e Requeijão', 'Pizza, bacon e requeijão.', 'R$ 17,00'],
@@ -20,7 +20,14 @@ const products = [
 
 export default function Page() {
   const [menu, setMenu] = useState(false)
+  const [catalogProducts, setCatalogProducts] = useState(defaultProducts)
   const [activeCategory, setActiveCategory] = useState('salgados')
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.from('products').select('name,description,price,category,subcategory,image_url').eq('active', true).order('created_at', { ascending: true }).then(({ data }) => {
+      if (data?.length) setCatalogProducts(data.map((product) => [product.name, product.description, `R$ ${Number(product.price).toFixed(2).replace('.', ',')}`, product.category, product.subcategory, product.image_url] as string[]))
+    })
+  }, [])
   const [heroFlavor, setHeroFlavor] = useState(0)
   const heroSlides = [
     { name: 'Sensação', description: 'Chocolate cremoso com morangos frescos em cada mordida.', image: '/products/hero-chocolate.png', color: '#F5C518' },
@@ -53,7 +60,7 @@ export default function Page() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [orderNumber, setOrderNumber] = useState<number | null>(null)
-  const priceByName = Object.fromEntries(products.map(([name, , price]) => [name, Number(price.replace('R$ ', '').replace(',', '.'))]))
+  const priceByName = Object.fromEntries(catalogProducts.map(([name, , price]) => [name, Number(price.replace('R$ ', '').replace(',', '.'))]))
   const total = useMemo(() => cart.reduce((sum, name) => sum + (priceByName[name] || 0), 0), [cart])
   const cartItems = useMemo(() => Object.entries(cart.reduce<Record<string, number>>((acc, name) => ({ ...acc, [name]: (acc[name] || 0) + 1 }), {})), [cart])
   const removeFromCart = (name: string) => setCart((current) => { const index = current.indexOf(name); return index === -1 ? current : [...current.slice(0, index), ...current.slice(index + 1)] })
@@ -95,7 +102,7 @@ export default function Page() {
     if (normalized.startsWith('três queijos')) return '/products/pastel-tres-queijos.png'
     return `/products/pastel-${savoryFlavorFor(name).toLowerCase().replace('ó', 'o')}.png`
   }
-  const visibleProducts = products.filter(([name]) => categoryFor(name) === activeCategory && (activeCategory !== 'salgados' || savoryFlavorFor(name) === activeSavory))
+  const visibleProducts = catalogProducts.filter(([name, , , category, subcategory]) => (category || categoryFor(name)) === activeCategory && (activeCategory !== 'salgados' || (subcategory || savoryFlavorFor(name)) === activeSavory))
   const submitOrder = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const nameParts = customerName.trim().split(/\s+/).filter(Boolean)
