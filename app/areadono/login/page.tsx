@@ -4,8 +4,8 @@ import { FormEvent, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 export default function OwnerLoginPage() {
-  const [email, setEmail] = useState('admin')
-  const [password, setPassword] = useState('admin@pastelboer')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
