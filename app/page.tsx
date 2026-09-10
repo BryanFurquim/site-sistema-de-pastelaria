@@ -758,12 +758,15 @@ export default function Page() {
                     <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em]">
                       Feito para dar água na boca
                     </p>
-                    <h1 className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.82] tracking-[-0.08em] lg:text-[clamp(4rem,7.5vw,7rem)]">
-                      O pastel
-                      <br />
-                      que <span className="text-[#FFF8EE]">você</span>
-                      <br />
-                      vai lembrar
+<h1 
+  className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.82] tracking-[-0.046em] lg:text-[clamp(4rem,7.5vw,7rem)]"
+  style={{ fontFamily: 'system-ui' }}
+>
+  O pastel
+  <br />
+  que <span className="text-[#FFF8EE]">você</span>
+  <br />
+  vai lembrar
                       <br />
                       amanhã.
                     </h1>
