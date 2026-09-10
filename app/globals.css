@@ -6,7 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Boldonse', sans-serif;
+  font-family: 'Passion One', sans-serif;
 }
 
 #inicio h1, #inicio h2, #inicio h3, #inicio h4, #inicio h5, #inicio h6 {

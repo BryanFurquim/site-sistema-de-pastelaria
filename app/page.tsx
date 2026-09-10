@@ -102,7 +102,7 @@ export default function Page() {
     if (normalized.startsWith('três queijos')) return '/products/pastel-tres-queijos.png'
     return `/products/pastel-${savoryFlavorFor(name).toLowerCase().replace('ó', 'o')}.png`
   }
-  const visibleProducts = catalogProducts.filter(([name, , , category, subcategory]) => (category || categoryFor(name)) === activeCategory && (activeCategory !== 'salgados' || (subcategory || savoryFlavorFor(name)) === activeSavory))
+  const visibleProducts = catalogProducts.filter(([name, , , category, subcategory]) => (category || categoryFor(name)) === activeCategory && (activeCategory !== 'salgados' || (subcategory || savoryFlavorFor(name)).toLowerCase() === activeSavory.toLowerCase()))
   const submitOrder = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const nameParts = customerName.trim().split(/\s+/).filter(Boolean)
