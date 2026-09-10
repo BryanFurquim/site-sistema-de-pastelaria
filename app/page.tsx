@@ -774,7 +774,7 @@ export default function Page() {
                       onClick={() => setMenu(true)}
                       className="mt-6 inline-flex items-center gap-3 border border-white bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#D92D20] transition hover:bg-[#D92D20] hover:text-white"
                     >
-                      Conhe��a o cardápio <ArrowRight size={16} />
+                      Conheça nosso cardápio <ArrowRight size={16} />
                     </button>
                   </div>
                   <div
