@@ -65,6 +65,8 @@ export default function Page() {
   const cartItems = useMemo(() => Object.entries(cart.reduce<Record<string, number>>((acc, name) => ({ ...acc, [name]: (acc[name] || 0) + 1 }), {})), [cart])
   const removeFromCart = (name: string) => setCart((current) => { const index = current.indexOf(name); return index === -1 ? current : [...current.slice(0, index), ...current.slice(index + 1)] })
   const addToCart = (name: string) => setCart((current) => [...current, name])
+  const quantityFor = (name: string) => cart.filter((item) => item === name).length
+  const decreaseFromCart = (name: string) => setCart((current) => { const index = current.indexOf(name); return index === -1 ? current : [...current.slice(0, index), ...current.slice(index + 1)] })
   const categoryFor = (name: string) => {
     if (['Prestígio', 'Brigadeiro', 'Romeu e Julieta', 'Sonho de Valsa', 'Ouro Branco', 'Brigadeiro c/Ouro Branco', 'Suflair', 'Suflair c/Ouro Branco'].includes(name)) return 'doces'
     if (['Fritas', 'Fritas c/Cheddar e Bacon', 'Anéis de Cebola', 'Anéis de Cebola c/Cheddar e Bacon'].includes(name)) return 'porcoes'
