@@ -717,7 +717,7 @@ export default function Page() {
     <>
       <SitePreloader />
       <main className="min-h-screen bg-[#FFF4C2] text-[#111111]">
-        <header className="sticky top-0 z-50 mx-auto flex max-w-7xl items-center justify-between bg-[#FFF4C2] px-6 py-[7px] lg:px-10">
+        <header className="sticky top-0 z-50 flex w-full items-center justify-between bg-[#FFF4C2] px-6 py-[7px] lg:px-10">
           <a href="#inicio" className="flex items-center gap-3">
             <span className="grid size-14 overflow-hidden rounded-2xl bg-white">
               <img
