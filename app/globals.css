@@ -13,6 +13,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-fraunces), Georgia, serif;
 }
 
+.checkout-page input::placeholder,
+.checkout-page textarea::placeholder {
+  color: #111111;
+  opacity: 0.72;
+}
+
 @theme inline {
   --font-sans: var(--font-dm-sans), Arial, sans-serif;
   --font-serif: var(--font-fraunces), Georgia, serif;
