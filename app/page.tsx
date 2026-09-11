@@ -748,89 +748,35 @@ export default function Page() {
         </header>
         {!menu ? (
           <>
-            <section
-              id="inicio"
-              className="relative min-h-[calc(100vh-90px)] overflow-hidden bg-[#F5C518] px-6 py-6 text-[#FFF4C2] lg:px-6"
-            >
-              <div className="mx-auto flex max-w-[1480px] flex-col">
-                <div className="relative flex min-h-[calc(100vh-150px)] flex-col justify-center py-12 lg:block lg:py-0">
-                  <div className="relative z-10 max-w-[390px] lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2">
-                    <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em]">
-                      Feito para dar água na boca
-                    </p>
-<h1 
-  className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.82] tracking-[-0.046em] lg:text-[clamp(4rem,7.5vw,7rem)]"
-  style={{ fontFamily: 'system-ui' }}
->
-  O pastel
-  <br />
-  que <span className="text-[#FFF8EE]">você</span>
-  <br />
-  vai lembrar
-                      <br />
-                      amanhã.
+            <section id="inicio" className="relative overflow-hidden bg-[#FFF8EE] px-6 py-8 text-[#2D1B16] lg:px-10 lg:py-10">
+              <div className="mx-auto max-w-[1480px]">
+                <div className="grid min-h-[calc(100vh-110px)] items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-4">
+                  <div className="order-2 flex flex-col items-start justify-center lg:order-1 lg:pl-10">
+                    <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-[#D92D20]">Feito na hora</p>
+                    <h1 className="max-w-[620px] font-serif text-[clamp(3.5rem,7vw,7rem)] font-black leading-[0.9] tracking-[-0.045em]">
+                      Escolha seu sabor e peça <span className="text-[#D92D20] italic">agora.</span>
                     </h1>
-                    <button
-                      onClick={() => setMenu(true)}
-                      className="mt-6 inline-flex items-center gap-3 border border-white bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#D92D20] transition hover:bg-[#D92D20] hover:text-white"
-                    >
-                      Conheça nosso cardápio <ArrowRight size={16} />
+                    <p className="mt-7 max-w-[560px] text-base leading-8 text-[#5A1A16] lg:text-lg">
+                      Pastel artesanal, massa crocante e recheio generoso. Carne com queijo, frango cremoso, palmito especial, doces e bebidas esperando por você.
+                    </p>
+                    <button onClick={() => setMenu(true)} className="mt-8 inline-flex items-center gap-8 rounded-full bg-[#D92D20] px-8 py-4 text-base font-bold text-white shadow-lg shadow-[#D92D20]/20 transition hover:bg-[#B92319]">
+                      Conheça nosso cardápio <ArrowRight size={21} />
                     </button>
                   </div>
-                  <div
-                    className="relative min-h-[360px] w-full overflow-hidden bg-[#F5C518] lg:min-h-[520px] lg:flex-1"
-                    style={{
-                      backgroundColor: currentHero.color,
-                      transition: "background-color 220ms ease",
-                    }}
-                  >
-                    <div className="pointer-events-none absolute inset-0">
-                      <p
-                        key={currentHero.name}
-                        className="animate-[hero-title-in_320ms_ease-out] hidden lg:block absolute left-[43%] top-1/2 z-0 -translate-y-1/2 font-sans text-[clamp(5rem,14vw,13rem)] font-black uppercase leading-none tracking-[-0.1em] text-[#FFF8EE]"
-                      >
-                        {currentHero.name}
-                      </p>
-                      <img
-                        key={currentHero.image}
-                        src={currentHero.image}
-                        alt={`Pastel sabor ${currentHero.name}`}
-                        className="hero-pastel-float absolute left-[76%] top-[46%] z-10 h-[160px] w-[230px] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] lg:left-auto lg:right-[8%] lg:top-1/2 lg:h-[220px] lg:w-[330px] lg:translate-x-0 lg:rotate-[-8deg] object-contain drop-shadow-[0_24px_14px_rgba(87,42,23,0.28)]"
-                      />
-                    </div>
-                    <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between lg:bottom-8 lg:left-[43%] lg:right-10">
-                      <div className="max-w-xs">
-                        <p className="text-sm font-bold uppercase tracking-wider">
-                          {currentHero.name}
-                        </p>
-                      </div>
-                      <div className="pointer-events-auto flex gap-2">
-                        <button
-                          type="button"
-                          aria-label="Pastel anterior"
-                          onClick={() =>
-                            setHeroFlavor(
-                              (heroFlavor - 1 + heroSlides.length) %
-                                heroSlides.length,
-                            )
-                          }
-                          className="grid size-12 place-items-center rounded-full border border-[#FFF8EE] text-xl transition hover:bg-[#FFF8EE] hover:text-[#D92D20]"
-                        >
-                          ←
-                        </button>
-                        <button
-                          type="button"
-                          aria-label="Próximo pastel"
-                          onClick={() =>
-                            setHeroFlavor((heroFlavor + 1) % heroSlides.length)
-                          }
-                          className="grid size-12 place-items-center rounded-full border border-[#FFF8EE] text-xl transition hover:bg-[#FFF8EE] hover:text-[#D92D20]"
-                        >
-                          →
-                        </button>
+                  <div className="order-1 relative min-h-[390px] overflow-hidden rounded-[2rem] bg-[#F5C518] lg:order-2 lg:min-h-[610px]" style={{ backgroundColor: currentHero.color, transition: "background-color 220ms ease" }}>
+                    <p key={currentHero.name} className="animate-[hero-title-in_320ms_ease-out] absolute left-8 top-10 z-0 font-sans text-[clamp(4.5rem,12vw,11rem)] font-black uppercase leading-[0.8] tracking-[-0.09em] text-[#FFF8EE]/70 lg:left-12 lg:top-14">{currentHero.name}</p>
+                    <img key={currentHero.image} src={currentHero.image} alt={`Pastel sabor ${currentHero.name}`} className="hero-pastel-float absolute bottom-8 right-[-8%] z-10 h-[260px] w-[400px] rotate-[-8deg] object-contain drop-shadow-[0_30px_18px_rgba(87,42,23,0.28)] sm:h-[340px] sm:w-[520px] lg:bottom-10 lg:right-[-5%] lg:h-[470px] lg:w-[700px]" />
+                    <div className="absolute bottom-6 left-6 right-6 z-20 flex items-end justify-between lg:bottom-8 lg:left-10 lg:right-10">
+                      <p className="text-sm font-bold uppercase tracking-wider text-[#FFF8EE]">{currentHero.name}</p>
+                      <div className="flex gap-2">
+                        <button type="button" aria-label="Pastel anterior" onClick={() => setHeroFlavor((heroFlavor - 1 + heroSlides.length) % heroSlides.length)} className="grid size-11 place-items-center rounded-full border border-[#FFF8EE] text-xl text-[#FFF8EE] transition hover:bg-[#FFF8EE] hover:text-[#D92D20]">←</button>
+                        <button type="button" aria-label="Próximo pastel" onClick={() => setHeroFlavor((heroFlavor + 1) % heroSlides.length)} className="grid size-11 place-items-center rounded-full border border-[#FFF8EE] text-xl text-[#FFF8EE] transition hover:bg-[#FFF8EE] hover:text-[#D92D20]">→</button>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div className="mt-8 grid overflow-hidden rounded-3xl bg-white shadow-sm sm:grid-cols-2 lg:grid-cols-4">
+                  {[["Feito na hora", "Sempre quentinho"], ["Recheio generoso", "Muito sabor em cada mordida"], ["Ingredientes de qualidade", "Selecionados com cuidado"], ["Sabor que vicia", "Difícil comer só um!"]].map(([title, text]) => <div key={title} className="border-b border-[#E9DED3] px-6 py-7 last:border-0 sm:border-r lg:border-b-0 lg:last:border-0"><p className="font-bold text-lg">{title}</p><p className="mt-2 leading-6 text-[#5A1A16]">{text}</p></div>)}
                 </div>
               </div>
             </section>
