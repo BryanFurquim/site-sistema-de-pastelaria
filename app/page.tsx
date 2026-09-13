@@ -885,7 +885,6 @@ export default function Page() {
                       {price}
                     </strong>
                     <div className="mt-4 flex items-center justify-between rounded-xl bg-[#FFF4C2] px-3 py-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#5A1A16]">Quantidade</span>
                       <div className="flex items-center gap-3">
                         <button type="button" aria-label={`Remover ${name}`} onClick={() => decreaseFromCart(name)} className="grid size-8 place-items-center rounded-full bg-[#D92D20] text-lg font-black text-white">−</button>
                         <strong className="min-w-5 text-center text-lg text-[#111111]">{quantityFor(name)}</strong>
