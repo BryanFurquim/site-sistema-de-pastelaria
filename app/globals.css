@@ -5,7 +5,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2 {
+  font-family: 'Passion One', sans-serif;
+  letter-spacing: 0.031em;
+  text-transform: uppercase;
+}
+
+h3, h4, h5, h6 {
   font-family: 'Passion One', sans-serif;
 }
 
