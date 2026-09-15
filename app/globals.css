@@ -6,7 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 h1, h2 {
-  font-family: 'Passion One', sans-serif;
+  font-family: var(--font-source-sans-3), 'Source Sans 3', sans-serif;
   letter-spacing: 0.031em;
   text-transform: uppercase;
 }
@@ -15,7 +15,11 @@ h3, h4, h5, h6 {
   font-family: 'Passion One', sans-serif;
 }
 
-#inicio h1, #inicio h2, #inicio h3, #inicio h4, #inicio h5, #inicio h6 {
+#inicio h1, #inicio h2 {
+  font-family: var(--font-source-sans-3), 'Source Sans 3', sans-serif;
+}
+
+#inicio h3, #inicio h4, #inicio h5, #inicio h6 {
   font-family: var(--font-fraunces), Georgia, serif;
 }
 
