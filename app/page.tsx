@@ -350,12 +350,20 @@ export default function Page() {
       return "/products/pastel-tres-queijos.png";
     return `/products/pastel-${savoryFlavorFor(name).toLowerCase().replace("ó", "o")}.png`;
   };
+  const normalizeText = (value: string) =>
+    value.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase();
   const visibleProducts = catalogProducts.filter(
-    ([name, , , category, subcategory]) =>
-      (category || categoryFor(name)) === activeCategory &&
-      (activeCategory !== "salgados" ||
-        (subcategory || savoryFlavorFor(name)).toLowerCase() ===
-          activeSavory.toLowerCase()),
+    ([name, , , category, subcategory]) => {
+      const normalizedName = normalizeText(name);
+      const resolvedCategory = normalizeText(category || categoryFor(name));
+      const resolvedSubcategory = normalizeText(subcategory || savoryFlavorFor(name));
+      const normalizedActiveSavory = normalizeText(activeSavory);
+      const isBroccoli = normalizedName.startsWith("brocolis");
+      return resolvedCategory === activeCategory &&
+        (activeCategory !== "salgados" ||
+          resolvedSubcategory === normalizedActiveSavory ||
+          (isBroccoli && normalizedActiveSavory === "brocolis"));
+    },
   );
   const submitOrder = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -616,7 +624,7 @@ export default function Page() {
                   setCustomerName(event.target.value);
                   setFormError("");
                 }}
-                className="rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal outline-none focus:border-[#D92D20]"
+                className="rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal text-[#111111] outline-none placeholder:text-[#6B7280] focus:border-[#D92D20] focus:ring-2 focus:ring-[#D92D20]/20"
                 placeholder="Seu nome"
               />
             </label>
@@ -637,7 +645,7 @@ export default function Page() {
                 required
                 value={customerPhone}
                 onChange={(event) => setCustomerPhone(event.target.value)}
-                className="rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal outline-none focus:border-[#D92D20]"
+                className="rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal text-[#111111] outline-none placeholder:text-[#6B7280] focus:border-[#D92D20] focus:ring-2 focus:ring-[#D92D20]/20"
                 placeholder="(19) 99999-9999"
               />
             </label>
@@ -652,7 +660,7 @@ export default function Page() {
                   setTableNumber(event.target.value.replace(/\D/g, ""));
                   setFormError("");
                 }}
-                className="rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal outline-none focus:border-[#D92D20]"
+                className="rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal text-[#111111] outline-none placeholder:text-[#6B7280] focus:border-[#D92D20] focus:ring-2 focus:ring-[#D92D20]/20"
                 placeholder="Ex.: 12"
               />
             </label>
@@ -705,7 +713,7 @@ export default function Page() {
             )}
             <button
               disabled={submitting}
-              className="mt-3 rounded-full bg-[#111111] px-6 py-4 font-bold text-white disabled:opacity-60"
+              className="mt-3 rounded-2xl bg-gradient-to-r from-[#5A0F0F] via-[#7F1D1D] to-[#3B0707] px-6 py-4 font-bold text-white shadow-[0_10px_24px_rgba(90,15,15,0.28)] transition hover:-translate-y-0.5 hover:from-[#7F1D1D] hover:via-[#991B1B] hover:to-[#5A0F0F] focus:outline-none focus:ring-2 focus:ring-[#D92D20] focus:ring-offset-2 focus:ring-offset-[#111111] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {submitting ? "Enviando pedido..." : "Confirmar pedido"}
             </button>
