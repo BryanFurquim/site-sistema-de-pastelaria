@@ -39,24 +39,38 @@ export default function OwnerDashboard() {
 
   useEffect(() => {
     let active = true
-    void loadData()
-    const channel = supabase.channel('owner-dashboard-live')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'orders' }, ({ new: newOrder }) => {
+    let reloadTimer: ReturnType<typeof setTimeout> | undefined
+    const refreshSafely = () => {
+      if (!active) return
+      void loadData()
+    }
+    const scheduleRecovery = () => {
+      if (reloadTimer) clearTimeout(reloadTimer)
+      reloadTimer = setTimeout(refreshSafely, 1500)
+    }
+    refreshSafely()
+    const channel = supabase.channel('owner-dashboard-live', { config: { broadcast: { self: false }, presence: { key: 'owner-dashboard' } } })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'orders' }, (payload) => {
         if (!active) return
-        setOrders((current) => current.some((order) => order.id === newOrder.id) ? current : [...current, newOrder as Order].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()))
+        if (payload.eventType === 'INSERT') {
+          const newOrder = payload.new as Order
+          setOrders((current) => current.some((order) => order.id === newOrder.id) ? current : [...current, newOrder].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()))
+        } else if (payload.eventType === 'UPDATE') {
+          const updatedOrder = payload.new as Order
+          setOrders((current) => current.map((order) => order.id === updatedOrder.id ? updatedOrder : order))
+        } else if (payload.eventType === 'DELETE') {
+          setOrders((current) => current.filter((order) => order.id !== payload.old.id))
+        }
       })
-      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'orders' }, ({ new: updatedOrder }) => {
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'order_reviews' }, refreshSafely)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, refreshSafely)
+      .subscribe((status) => {
         if (!active) return
-        setOrders((current) => current.map((order) => order.id === updatedOrder.id ? updatedOrder as Order : order))
+        const normalizedStatus = status === 'SUBSCRIBED' ? 'connected' : status.toLowerCase()
+        setRealtime(normalizedStatus)
+        if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') scheduleRecovery()
       })
-      .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'orders' }, ({ old: deletedOrder }) => {
-        if (!active) return
-        setOrders((current) => current.filter((order) => order.id !== deletedOrder.id))
-      })
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'order_reviews' }, () => active && void loadData())
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, () => active && void loadData())
-      .subscribe((status) => active && setRealtime(status === 'SUBSCRIBED' ? 'connected' : status.toLowerCase()))
-    return () => { active = false; void supabase.removeChannel(channel) }
+    return () => { active = false; if (reloadTimer) clearTimeout(reloadTimer); void supabase.removeChannel(channel) }
   }, [supabase])
 
   async function logout() { await supabase.auth.signOut(); window.location.href = '/areadono/login' }
