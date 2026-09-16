@@ -107,20 +107,24 @@ export default function Page() {
       .eq("active", true)
       .order("created_at", { ascending: true })
       .then(({ data }) => {
-        if (data?.length)
-          setCatalogProducts(
-            data.map(
-              (product) =>
-                [
-                  product.name,
-                  product.description,
-                  `R$ ${Number(product.price).toFixed(2).replace(".", ",")}`,
-                  product.category,
-                  product.subcategory,
-                  product.image_url,
-                ] as string[],
-            ),
+        if (data?.length) {
+          const databaseProducts = data.map(
+            (product) =>
+              [
+                product.name,
+                product.description,
+                `R$ ${Number(product.price).toFixed(2).replace(".", ",")}`,
+                product.category,
+                product.subcategory,
+                product.image_url,
+              ] as string[],
           );
+          const databaseNames = new Set(databaseProducts.map(([name]) => name));
+          setCatalogProducts([
+            ...databaseProducts,
+            ...defaultProducts.filter(([name]) => !databaseNames.has(name)),
+          ]);
+        }
       });
   }, []);
   const [heroFlavor, setHeroFlavor] = useState(0);
@@ -351,18 +355,17 @@ export default function Page() {
     return `/products/pastel-${savoryFlavorFor(name).toLowerCase().replace("ó", "o")}.png`;
   };
   const normalizeText = (value: string) =>
-    value.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase();
+    value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const visibleProducts = catalogProducts.filter(
-    ([name, , , category, subcategory]) => {
-      const normalizedName = normalizeText(name);
+    ([name, , , category]) => {
       const resolvedCategory = normalizeText(category || categoryFor(name));
-      const resolvedSubcategory = normalizeText(subcategory || savoryFlavorFor(name));
+      const normalizedActiveCategory = normalizeText(activeCategory);
+      const resolvedFlavor = normalizeText(savoryFlavorFor(name));
       const normalizedActiveSavory = normalizeText(activeSavory);
-      const isBroccoli = normalizedName.startsWith("brocolis");
-      return resolvedCategory === activeCategory &&
-        (activeCategory !== "salgados" ||
-          resolvedSubcategory === normalizedActiveSavory ||
-          (isBroccoli && normalizedActiveSavory === "brocolis"));
+      const categoryMatches = resolvedCategory === normalizedActiveCategory ||
+        (normalizedActiveCategory === "salgados" && !category);
+      return categoryMatches &&
+        (normalizedActiveCategory !== "salgados" || resolvedFlavor === normalizedActiveSavory);
     },
   );
   const submitOrder = async (event: React.FormEvent<HTMLFormElement>) => {
