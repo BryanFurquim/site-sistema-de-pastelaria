@@ -638,7 +638,7 @@ export default function Page() {
                 onChange={(event) => setCustomerComment(event.target.value)}
                 rows={3}
                 maxLength={500}
-                className="resize-none rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal outline-none focus:border-[#D92D20]"
+                className="resize-none rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal text-[#111111] placeholder:text-[#6B7280] outline-none focus:border-[#D92D20] focus:ring-2 focus:ring-[#D92D20]/20"
                 placeholder="Ex.: tirar tomate"
               />
             </label>

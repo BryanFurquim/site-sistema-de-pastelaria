@@ -257,8 +257,8 @@ h3, h4, h5, h6 {
 .notification-card { display: flex; align-items: center; gap: .75rem; cursor: pointer; border: 2px solid transparent; border-radius: 1.25rem; background: color-mix(in srgb, #FFF4C2 75%, white); padding: .85rem 1rem; transition: transform .2s ease, border-color .2s ease, background-color .2s ease; }
 .notification-card:hover { transform: translateY(-2px); border-color: #F5C518; }
 .notification-card-selected { border-color: #D92D20; background: #F5C518; box-shadow: 0 8px 0 #111111; }
-.notification-card strong { display: block; font-size: .9rem; }
-.notification-card small { display: block; margin-top: .2rem; font-size: .7rem; line-height: 1.35; opacity: .7; }
+.notification-card strong { display: block; color: #111111; font-size: .9rem; }
+.notification-card small { display: block; margin-top: .2rem; color: #111111; font-size: .7rem; line-height: 1.35; opacity: .7; }
 .notification-icon { display: grid; flex: 0 0 2.5rem; place-items: center; border-radius: .85rem; background: #111111; color: #F5C518; font-size: 1.15rem; height: 2.5rem; }
 .notification-dot { margin-left: auto; height: 1.15rem; width: 1.15rem; border: 2px solid #111111; border-radius: 999px; }
 .notification-card-selected .notification-dot { background: #D92D20; box-shadow: inset 0 0 0 3px #F5C518; }
