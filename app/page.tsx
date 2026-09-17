@@ -761,10 +761,11 @@ export default function Page() {
           <>
             <section
               id="inicio"
-              className="relative min-h-[calc(100vh-90px)] overflow-hidden bg-[#F5C518] px-6 py-6 text-[#FFF4C2] lg:px-6"
+              className="relative min-h-[calc(100vh-90px)] overflow-hidden bg-[#F5C518] px-6 py-2 text-[#FFF4C2] lg:px-6"
+              style={{ paddingTop: '-11px', paddingBottom: '8px' }}
             >
               <div className="mx-auto flex max-w-[1480px] flex-col">
-                <div className="relative flex min-h-[calc(100vh-150px)] flex-col justify-center py-12 lg:block lg:py-0">
+                <div className="relative flex min-h-[calc(100vh-150px)] flex-col justify-center py-5 lg:block lg:py-0" style={{ paddingTop: '17px' }}>
                   <div className="relative z-10 max-w-[390px] lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2">
                     <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em]">Feito para dar água na boca</p>
                     <h1 className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.82] tracking-[-0.046em] lg:text-[clamp(4rem,7.5vw,7rem)]" style={{ fontFamily: 'system-ui' }}>O pastel<br />que <span className="text-[#FFF8EE]">você</span><br />vai lembrar<br />amanhã.</h1>
@@ -772,7 +773,7 @@ export default function Page() {
                   </div>
                   <div className="relative min-h-[360px] w-full overflow-hidden bg-[#F5C518] lg:min-h-[520px] lg:flex-1" style={{ backgroundColor: currentHero.color, transition: 'background-color 220ms ease' }}>
                     <div className="pointer-events-none absolute inset-0"><p key={currentHero.name} className="animate-[hero-title-in_320ms_ease-out] hidden lg:block absolute left-[43%] top-1/2 z-0 -translate-y-1/2 font-sans text-[clamp(5rem,14vw,13rem)] font-black uppercase leading-none tracking-[-0.1em] text-[#FFF8EE]">{currentHero.name}</p><img key={currentHero.image} src={currentHero.image} alt={`Pastel sabor ${currentHero.name}`} className="hero-pastel-float absolute left-[76%] top-[46%] z-10 h-[160px] w-[230px] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] lg:left-auto lg:right-[8%] lg:top-1/2 lg:h-[220px] lg:w-[330px] lg:translate-x-0 lg:rotate-[-8deg] object-contain drop-shadow-[0_24px_14px_rgba(87,42,23,0.28)]" /></div>
-                    <div className="absolute bottom-[57px] left-1/2 z-20 flex -translate-x-1/2 items-center justify-center lg:bottom-8 lg:left-[43%] lg:right-10 lg:translate-x-0 lg:justify-end"><div className="pointer-events-auto flex gap-2"><button type="button" aria-label="Pastel anterior" onClick={() => setHeroFlavor((heroFlavor - 1 + heroSlides.length) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#FFF8EE] text-xl text-[#111111] transition hover:bg-[#FFF8EE] hover:text-[#D92D20]">←</button><button type="button" aria-label="Próximo pastel" onClick={() => setHeroFlavor((heroFlavor + 1) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#FFF8EE] text-xl text-[#111111] transition hover:bg-[#FFF8EE] hover:text-[#D92D20]">→</button></div></div>
+                    <div className="absolute bottom-[57px] left-1/2 z-20 flex -translate-x-1/2 items-center justify-center lg:bottom-8 lg:left-[43%] lg:right-10 lg:translate-x-0 lg:justify-end"><div className="pointer-events-auto flex gap-2"><button type="button" aria-label="Pastel anterior" onClick={() => setHeroFlavor((heroFlavor - 1 + heroSlides.length) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">←</button><button type="button" aria-label="Próximo pastel" onClick={() => setHeroFlavor((heroFlavor + 1) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">→</button></div></div>
                   </div>
                 </div>
               </div>
