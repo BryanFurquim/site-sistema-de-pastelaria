@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SitePreloader } from "@/components/site-preloader";
 import { ArrowRight, ShoppingBag, Sparkles } from "lucide-react";
@@ -424,6 +424,19 @@ export default function Page() {
       );
     }
   };
+  const heroScrollLock = useRef(0);
+  const handleHeroWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    if (window.innerWidth < 1024 || Math.abs(event.deltaY) < 12) return;
+    event.preventDefault();
+    const now = Date.now();
+    if (now - heroScrollLock.current < 420) return;
+    heroScrollLock.current = now;
+    setHeroFlavor((current) =>
+      event.deltaY > 0
+        ? (current + 1) % heroSlides.length
+        : (current - 1 + heroSlides.length) % heroSlides.length,
+    );
+  };
   const submitReview = async () => {
     if (!reviewRating || !customerName.trim()) return;
     const { error } = await createClient()
@@ -574,7 +587,7 @@ export default function Page() {
             Finalizar pedido
           </p>
           <h1 className="mt-3 font-serif text-5xl font-bold">
-            Só falta identificar você.
+            S�� falta identificar você.
           </h1>
           <p className="mt-4 leading-7 text-[#FFF4C2]/80">
             Preencha seus dados para enviarmos o pedido para a cozinha.
@@ -770,7 +783,7 @@ export default function Page() {
                     <h1 className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.82] tracking-[-0.046em] lg:text-[clamp(4rem,7.5vw,7rem)]" style={{ fontFamily: 'system-ui' }}>O pastel<br />que <span className="text-[#FFF8EE]">você</span><br />vai lembrar<br />amanhã.</h1>
                     <button onClick={() => setMenu(true)} className="mt-6 inline-flex items-center gap-3 border border-white bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#D92D20] transition hover:bg-[#D92D20] hover:text-white">Conheça nosso cardápio <ArrowRight size={16} /></button>
                   </div>
-                  <div className="relative min-h-[360px] w-full overflow-hidden bg-[#F5C518] lg:min-h-[520px] lg:flex-1" style={{ backgroundColor: currentHero.color, transition: 'background-color 220ms ease' }}>
+                  <div onWheel={handleHeroWheel} className="relative min-h-[360px] w-full overflow-hidden bg-[#F5C518] lg:min-h-[520px] lg:flex-1" style={{ backgroundColor: currentHero.color, transition: 'background-color 220ms ease' }} aria-label="Role o mouse para trocar o sabor do pastel">
                     <div className="pointer-events-none absolute inset-0"><img key={currentHero.image} src={currentHero.image} alt={`Pastel sabor ${currentHero.name}`} className="hero-pastel-float absolute left-[76%] top-[46%] z-10 h-[160px] w-[230px] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] object-contain drop-shadow-[0_24px_14px_rgba(87,42,23,0.28)] lg:left-auto lg:right-[3%] lg:top-[calc(58%+200px)] lg:h-[450px] lg:w-[660px] lg:translate-x-0 lg:rotate-[-8deg]" /></div>
                     <div className="absolute bottom-[67px] left-1/2 z-20 flex -translate-x-1/2 items-center justify-center lg:hidden"><div className="pointer-events-auto flex gap-2"><button type="button" aria-label="Pastel anterior" onClick={() => setHeroFlavor((heroFlavor - 1 + heroSlides.length) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">←</button><button type="button" aria-label="Próximo pastel" onClick={() => setHeroFlavor((heroFlavor + 1) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">→</button></div></div>
                   </div>
