@@ -19,7 +19,7 @@ const rubik = Rubik({ subsets: ['latin'], variable: '--font-rubik' })
 const crimsonText = Crimson_Text({ weight: ['400', '600'], subsets: ['latin'], variable: '--font-crimson-text' })
 
 export const metadata: Metadata = {
-  title: 'Pastel Boer | Uma delícia de pastel',
+  title: 'Pastelaria Boer | pastelariaboer.vercel.app',
   description: 'Pastéis crocantes, recheio generoso e sabor de tradição. Peça online ou visite o Pastel Boer em Americana - SP.',
   generator: 'v0.app',
 }
