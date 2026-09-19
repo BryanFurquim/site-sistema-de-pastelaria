@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SitePreloader } from "@/components/site-preloader";
-import { ArrowRight, MapPin, ShoppingBag, Sparkles } from "lucide-react";
+import { ArrowRight, ShoppingBag, Sparkles } from "lucide-react";
 
 const defaultProducts = [
   ["Carne", "Carne temperada.", "R$ 12,00"],
@@ -424,6 +424,19 @@ export default function Page() {
       );
     }
   };
+  const heroScrollLock = useRef(0);
+  const handleHeroWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    if (window.innerWidth < 1024 || Math.abs(event.deltaY) < 12) return;
+    event.preventDefault();
+    const now = Date.now();
+    if (now - heroScrollLock.current < 420) return;
+    heroScrollLock.current = now;
+    setHeroFlavor((current) =>
+      event.deltaY > 0
+        ? (current + 1) % heroSlides.length
+        : (current - 1 + heroSlides.length) % heroSlides.length,
+    );
+  };
   const submitReview = async () => {
     if (!reviewRating || !customerName.trim()) return;
     const { error } = await createClient()
@@ -574,7 +587,7 @@ export default function Page() {
             Finalizar pedido
           </p>
           <h1 className="mt-3 font-serif text-5xl font-bold">
-            Só falta identificar você.
+            S�� falta identificar você.
           </h1>
           <p className="mt-4 leading-7 text-[#FFF4C2]/80">
             Preencha seus dados para enviarmos o pedido para a cozinha.
@@ -740,8 +753,7 @@ export default function Page() {
             <span className="font-serif text-2xl font-bold">Pastel Boer</span>
           </a>
           <nav className="hidden gap-8 text-sm font-bold lg:flex">
-            <a href="#sobre">A casa</a>
-            <a href="#contato">Contato</a>
+
           </nav>
           <button
             onClick={() =>
@@ -771,44 +783,10 @@ export default function Page() {
                     <h1 className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.82] tracking-[-0.046em] lg:text-[clamp(4rem,7.5vw,7rem)]" style={{ fontFamily: 'system-ui' }}>O pastel<br />que <span className="text-[#FFF8EE]">você</span><br />vai lembrar<br />amanhã.</h1>
                     <button onClick={() => setMenu(true)} className="mt-6 inline-flex items-center gap-3 border border-white bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#D92D20] transition hover:bg-[#D92D20] hover:text-white">Conheça nosso cardápio <ArrowRight size={16} /></button>
                   </div>
-                  <div className="relative min-h-[360px] w-full overflow-hidden bg-[#F5C518] lg:min-h-[520px] lg:flex-1" style={{ backgroundColor: currentHero.color, transition: 'background-color 220ms ease' }}>
-                    <div className="pointer-events-none absolute inset-0"><p key={currentHero.name} className="animate-[hero-title-in_320ms_ease-out] hidden lg:block absolute left-[43%] top-1/2 z-0 -translate-y-1/2 font-sans text-[clamp(5rem,14vw,13rem)] font-black uppercase leading-none tracking-[-0.1em] text-[#FFF8EE]">{currentHero.name}</p><img key={currentHero.image} src={currentHero.image} alt={`Pastel sabor ${currentHero.name}`} className="hero-pastel-float absolute left-[76%] top-[46%] z-10 h-[160px] w-[230px] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] lg:left-auto lg:right-[8%] lg:top-1/2 lg:h-[220px] lg:w-[330px] lg:translate-x-0 lg:rotate-[-8deg] object-contain drop-shadow-[0_24px_14px_rgba(87,42,23,0.28)]" /></div>
-                    <div className="absolute bottom-[67px] left-1/2 z-20 flex -translate-x-1/2 items-center justify-center lg:bottom-8 lg:left-[43%] lg:right-10 lg:translate-x-0 lg:justify-end"><div className="pointer-events-auto flex gap-2"><button type="button" aria-label="Pastel anterior" onClick={() => setHeroFlavor((heroFlavor - 1 + heroSlides.length) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">←</button><button type="button" aria-label="Próximo pastel" onClick={() => setHeroFlavor((heroFlavor + 1) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">→</button></div></div>
+                  <div onWheel={handleHeroWheel} className="relative min-h-[360px] w-full overflow-hidden bg-[#F5C518] lg:min-h-[520px] lg:flex-1" style={{ backgroundColor: currentHero.color, transition: 'background-color 220ms ease' }} aria-label="Role o mouse para trocar o sabor do pastel">
+                    <div className="pointer-events-none absolute inset-0"><img key={currentHero.image} src={currentHero.image} alt={`Pastel sabor ${currentHero.name}`} className="hero-pastel-float absolute left-[76%] top-[46%] z-10 h-[160px] w-[230px] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] object-contain drop-shadow-[0_24px_14px_rgba(87,42,23,0.28)] lg:left-auto lg:right-[3%] lg:top-[calc(58%+200px)] lg:h-[450px] lg:w-[660px] lg:translate-x-0 lg:rotate-[-8deg]" /></div>
+                    <div className="absolute bottom-[67px] left-1/2 z-20 flex -translate-x-1/2 items-center justify-center lg:hidden"><div className="pointer-events-auto flex gap-2"><button type="button" aria-label="Pastel anterior" onClick={() => setHeroFlavor((heroFlavor - 1 + heroSlides.length) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">←</button><button type="button" aria-label="Próximo pastel" onClick={() => setHeroFlavor((heroFlavor + 1) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">→</button></div></div>
                   </div>
-                </div>
-              </div>
-            </section>
-            <section
-              id="sobre"
-              className="border-y border-[#E9DED3] bg-[#FFF8EE] px-6 py-16 lg:px-10 lg:py-24"
-            >
-              <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
-                <div className="order-2 overflow-hidden rounded-[2rem] bg-[#111111] shadow-xl lg:order-1">
-                  <img
-                    src="/pastel-boer-flavors.png"
-                    alt="Pastéis crocantes com diversos recheios"
-                    className="h-full min-h-[360px] w-full object-cover lg:min-h-[520px]"
-                  />
-                </div>
-                <div className="order-1 flex flex-col gap-6 lg:order-2">
-                  <p className="text-sm font-bold uppercase tracking-[.2em] text-[#D92D20]">
-                    Seu próximo pedido começa aqui
-                  </p>
-                  <h2 className="font-serif text-4xl font-bold">
-                    Escolha seu sabor e peça agora.
-                  </h2>
-                  <p className="leading-8 text-[#5A1A16]">
-                    Pastel artesanal, massa crocante e recheio generoso. Carne
-                    com queijo, frango cremoso, palmito especial, doces e
-                    bebidas esperando por você.
-                  </p>
-                  <button
-                    onClick={() => setMenu(true)}
-                    className="w-fit rounded-full bg-[#D92D20] px-5 py-3 text-sm font-bold text-white"
-                  >
-                    Fazer meu pedido agora{" "}
-                    <ArrowRight size={16} className="ml-2 inline" />
-                  </button>
                 </div>
               </div>
             </section>
@@ -993,13 +971,6 @@ export default function Page() {
             )}
           </section>
         )}
-        <footer
-          id="contato"
-          className="mx-auto flex max-w-7xl items-center gap-2 px-6 py-10 text-sm text-[#5A1A16] lg:px-10"
-        >
-          <MapPin size={18} /> R. Prosperidade, 375 - Jardim Boer I, Americana -
-          SP, 13476-630
-        </footer>
       </main>
     </>
   );
