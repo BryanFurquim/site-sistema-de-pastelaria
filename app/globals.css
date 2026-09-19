@@ -204,7 +204,7 @@ h3, h4, h5, h6 {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero-pastel-float { animation: hero-carousel-float 4.8s cubic-bezier(.22,.61,.36,1) both; }
+  .hero-pastel-float { animation: hero-carousel-float 5s cubic-bezier(.22,.61,.36,1) both; }
 }
 
 @keyframes hero-carousel-float-mobile {
