@@ -893,7 +893,7 @@ export default function Page() {
                         {price}
                       </strong>
                     </div>
-                    <div className="mt-auto flex h-[42px] w-full shrink-0 items-center justify-center rounded-xl bg-[#FFF4C2] px-2 py-1.5 sm:px-3 sm:py-2">
+                    <div className="mt-auto flex h-[42px] w-fit shrink-0 items-center justify-center self-start rounded-xl bg-[#FFF4C2] px-2 py-1.5 sm:px-3 sm:py-2">
                       <div className="flex items-center gap-3">
                         <button type="button" aria-label={`Remover ${name}`} onClick={() => decreaseFromCart(name)} className="grid size-8 place-items-center rounded-full bg-[#D92D20] text-lg font-black text-white">−</button>
                         <strong className="min-w-5 text-center text-lg text-[#111111]">{quantityFor(name)}</strong>
