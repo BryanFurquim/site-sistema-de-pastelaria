@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SitePreloader } from "@/components/site-preloader";
-import { ArrowRight, ShoppingBag, Sparkles } from "lucide-react";
+import { ArrowRight, Moon, ShoppingBag, Sparkles, Sun } from "lucide-react";
 
 const defaultProducts = [
   ["Carne", "Carne temperada.", "R$ 12,00"],
@@ -210,6 +210,7 @@ export default function Page() {
       window.setTimeout(preloadVisibleSlides, 0);
     }
   }, []);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeSavory, setActiveSavory] = useState("Carne");
   const [cart, setCart] = useState<string[]>([]);
   const [checkout, setCheckout] = useState(false);
@@ -753,8 +754,8 @@ export default function Page() {
   return (
     <>
       <SitePreloader />
-      <main className="min-h-screen bg-[#FFF4C2] text-[#111111]">
-        <header className="sticky top-0 z-50 flex w-full items-center justify-between bg-[#FFF4C2] px-6 py-[7px] lg:px-10">
+      <main className={`min-h-screen ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
+        <header className={`sticky top-0 z-50 flex w-full items-center justify-between px-6 py-[7px] lg:px-10 ${isDarkMode ? "bg-[#111111]" : "bg-[#FFF4C2]"}`}>
           <a href="#inicio" className="flex items-center gap-3">
             <span className="grid size-14 overflow-hidden rounded-2xl bg-white">
               <img
@@ -768,7 +769,11 @@ export default function Page() {
           <nav className="hidden gap-8 text-sm font-bold lg:flex">
 
           </nav>
-          <button
+          <div className="flex items-center gap-2">
+            <button type="button" aria-label={isDarkMode ? "Ativar modo claro" : "Ativar modo escuro"} onClick={() => setIsDarkMode((current) => !current)} className={`grid size-11 place-items-center rounded-full border transition hover:bg-white ${isDarkMode ? "border-[#FFF4C2]/40 bg-[#1f1f1f] text-[#FFF4C2] hover:bg-[#2b2b2b]" : "border-[#D92D20]/30 bg-white/70 text-[#111111]"}`} title={isDarkMode ? "Modo claro" : "Modo escuro"}>
+              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
             onClick={() =>
               cart.length > 0 ? setCheckout(true) : setMenu(true)
             }
@@ -781,6 +786,7 @@ export default function Page() {
               </span>
             )}
           </button>
+          </div>
         </header>
         {!menu ? (
           <>
@@ -805,7 +811,7 @@ export default function Page() {
             </section>
           </>
         ) : (
-          <section className="mx-auto max-w-7xl px-6 py-12 lg:px-10">
+          <section className={`mx-auto max-w-7xl px-6 py-12 lg:px-10 ${isDarkMode ? "text-[#FFF4C2]" : "text-[#111111]"}`}>
             <button
               onClick={() => setMenu(false)}
               className="mb-8 font-bold text-[#D92D20]"
