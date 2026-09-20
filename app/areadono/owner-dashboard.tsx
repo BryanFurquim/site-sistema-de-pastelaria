@@ -75,7 +75,7 @@ export default function OwnerDashboard() {
     return () => { active = false; if (reloadTimer) clearTimeout(reloadTimer); window.clearInterval(recoveryInterval); void supabase.removeChannel(channel) }
   }, [supabase])
 
-  async function logout() { await supabase.auth.signOut(); window.location.href = '/areadono/login' }
+  async function logout() { await supabase.auth.signOut(); window.location.href = '/admin' }
   async function updateStatus(id: string, status: string) {
     const { error } = await supabase.from('orders').update({ status }).eq('id', id)
     if (error) return
