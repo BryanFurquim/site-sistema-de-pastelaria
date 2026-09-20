@@ -863,7 +863,7 @@ export default function Page() {
                 ([name, description, price, , , image_url]) => (
 <article
                     key={name}
-                    className="flex min-h-[380px] flex-col rounded-2xl border border-[#DDE4D9] bg-white p-3 text-left transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg"
+                    className="flex h-[380px] flex-col rounded-2xl border border-[#DDE4D9] bg-white p-2.5 text-left transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:p-3"
                   >
                     <div className="flex h-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white">
                       <img
@@ -878,13 +878,13 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="mt-5 min-h-[3.75rem]">
-                      <h2 className="font-serif text-xl font-bold leading-tight">
+                    <div className="mt-4 h-[3.75rem] overflow-hidden sm:mt-5">
+                      <h2 className="font-serif text-lg font-bold leading-tight sm:text-xl">
                         {name}
                       </h2>
                     </div>
-                    <div className="mt-2 min-h-[4.5rem]">
-                      <p className="text-sm leading-6 text-[#5A1A16]">
+                    <div className="mt-2 h-[4.5rem] overflow-hidden">
+                      <p className="text-sm leading-5 text-[#5A1A16] sm:leading-6">
                         {description}
                       </p>
                     </div>
@@ -893,7 +893,7 @@ export default function Page() {
                         {price}
                       </strong>
                     </div>
-                    <div className="mt-auto flex items-center justify-center rounded-xl bg-[#FFF4C2] px-3 py-2">
+                    <div className="mt-auto flex h-[42px] w-full shrink-0 items-center justify-center rounded-xl bg-[#FFF4C2] px-2 py-1.5 sm:px-3 sm:py-2">
                       <div className="flex items-center gap-3">
                         <button type="button" aria-label={`Remover ${name}`} onClick={() => decreaseFromCart(name)} className="grid size-8 place-items-center rounded-full bg-[#D92D20] text-lg font-black text-white">−</button>
                         <strong className="min-w-5 text-center text-lg text-[#111111]">{quantityFor(name)}</strong>
