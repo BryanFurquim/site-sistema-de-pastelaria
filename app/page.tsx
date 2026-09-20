@@ -863,9 +863,9 @@ export default function Page() {
                 ([name, description, price, , , image_url]) => (
 <article
                     key={name}
-                    className="rounded-2xl border border-[#DDE4D9] bg-white p-3 text-left transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg"
+                    className="flex min-h-[380px] flex-col rounded-2xl border border-[#DDE4D9] bg-white p-3 text-left transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg"
                   >
-                    <div className="flex h-24 items-center justify-center overflow-hidden rounded-2xl bg-white">
+                    <div className="flex h-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white">
                       <img
                         src={image_url || productImageFor(name)}
                         alt={`Pastel ${name}`}
@@ -878,16 +878,22 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <h2 className="mt-5 font-serif text-xl font-bold">
-                      {name}
-                    </h2>
-                    <p className="mt-2 text-sm leading-6 text-[#5A1A16]">
-                      {description}
-                    </p>
-                    <strong className="mt-4 block text-[#D92D20]">
-                      {price}
-                    </strong>
-                    <div className="mt-4 flex items-center justify-between rounded-xl bg-[#FFF4C2] px-3 py-2">
+                    <div className="mt-5 min-h-[3.75rem]">
+                      <h2 className="font-serif text-xl font-bold leading-tight">
+                        {name}
+                      </h2>
+                    </div>
+                    <div className="mt-2 min-h-[4.5rem]">
+                      <p className="text-sm leading-6 text-[#5A1A16]">
+                        {description}
+                      </p>
+                    </div>
+                    <div className="mt-3 min-h-[1.75rem]">
+                      <strong className="block text-[#D92D20]">
+                        {price}
+                      </strong>
+                    </div>
+                    <div className="mt-auto flex items-center justify-center rounded-xl bg-[#FFF4C2] px-3 py-2">
                       <div className="flex items-center gap-3">
                         <button type="button" aria-label={`Remover ${name}`} onClick={() => decreaseFromCart(name)} className="grid size-8 place-items-center rounded-full bg-[#D92D20] text-lg font-black text-white">−</button>
                         <strong className="min-w-5 text-center text-lg text-[#111111]">{quantityFor(name)}</strong>
