@@ -763,7 +763,7 @@ export default function Page() {
                 className="h-full w-full object-contain"
               />
             </span>
-            <span className="font-serif text-2xl font-bold">Pastel Boer</span>
+            <span className="text-2xl font-bold" style={{ fontFamily: "'Fredoka', sans-serif" }}>Pastel Boer</span>
           </a>
           <nav className="hidden gap-8 text-sm font-bold lg:flex">
 
@@ -812,9 +812,14 @@ export default function Page() {
             >
               ← Voltar para a casa
             </button>
-            <h1 className="font-serif text-5xl font-bold">
-              Escolha o seu favorito.
-            </h1>
+            <div className="relative mb-10 overflow-hidden rounded-[2rem] bg-[#F5C518] px-5 py-8 text-[#111111] shadow-[0_14px_0_#D92D20] sm:px-10 sm:py-10">
+              <div className="absolute -right-8 -top-12 size-36 rounded-full border-[18px] border-[#FFF4C2]/70" aria-hidden="true" />
+              <div className="absolute -bottom-16 right-20 size-40 rounded-full border-[18px] border-[#D92D20]/20" aria-hidden="true" />
+              <p className="relative mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D92D20]">Pastel Boer</p>
+              <h1 className="relative max-w-[620px] text-4xl font-extrabold uppercase leading-[0.95] tracking-[-0.04em] sm:text-6xl" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                Escolha o seu favorito.
+              </h1>
+            </div>
             <div
               role="tablist"
               aria-label="Categorias do cardápio"
