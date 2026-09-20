@@ -195,6 +195,17 @@ h3, h4, h5, h6 {
   to { opacity: 1; transform: translateY(-50%) translateX(0) rotate(-8deg) scale(1); }
 }
 
+.admin-light aside { background: #fff4c2; border-color: rgba(90, 26, 22, .12); color: #111111; }
+.admin-light aside nav button { color: rgba(17, 17, 17, .68); }
+.admin-light aside button { color: #111111; }
+.admin-light header button { color: #111111; border-color: rgba(90, 26, 22, .15); }
+.admin-light header nav { border-color: rgba(90, 26, 22, .12); }
+.admin-light header nav button { background: rgba(17, 17, 17, .06); color: rgba(17, 17, 17, .72); }
+.admin-light section, .admin-light section p, .admin-light section h2, .admin-light section label { color: #111111; }
+.admin-light section article, .admin-light section section { border-color: rgba(90, 26, 22, .12); background: rgba(255, 255, 255, .42); }
+.admin-light input, .admin-light select { color: #111111; background: rgba(255, 255, 255, .7); border-color: rgba(90, 26, 22, .15); }
+.admin-light input::placeholder { color: rgba(17, 17, 17, .45); }
+
 @keyframes hero-carousel-float {
   0% { opacity: 0; transform: translateY(-50%) translateX(72px) rotate(7deg) scale(.9); }
   18% { opacity: 1; transform: translateY(calc(-50% - 5px)) translateX(0) rotate(-7deg) scale(1); }
