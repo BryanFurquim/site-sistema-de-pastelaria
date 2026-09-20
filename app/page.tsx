@@ -770,7 +770,7 @@ export default function Page() {
 
           </nav>
           <div className="flex items-center gap-2">
-            <button type="button" aria-label={isDarkMode ? "Ativar modo claro" : "Ativar modo escuro"} onClick={() => setIsDarkMode((current) => !current)} className="grid size-11 place-items-center rounded-full border border-[#D92D20]/30 bg-white/70 text-[#111111] transition hover:bg-white" title={isDarkMode ? "Modo claro" : "Modo escuro"}>
+            <button type="button" aria-label={isDarkMode ? "Ativar modo claro" : "Ativar modo escuro"} onClick={() => setIsDarkMode((current) => !current)} className={`grid size-11 place-items-center rounded-full border transition hover:bg-white ${isDarkMode ? "border-[#FFF4C2]/40 bg-[#1f1f1f] text-[#FFF4C2] hover:bg-[#2b2b2b]" : "border-[#D92D20]/30 bg-white/70 text-[#111111]"}`} title={isDarkMode ? "Modo claro" : "Modo escuro"}>
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <button
@@ -811,7 +811,7 @@ export default function Page() {
             </section>
           </>
         ) : (
-          <section className="mx-auto max-w-7xl px-6 py-12 lg:px-10">
+          <section className={`mx-auto max-w-7xl px-6 py-12 lg:px-10 ${isDarkMode ? "text-[#FFF4C2]" : "text-[#111111]"}`}>
             <button
               onClick={() => setMenu(false)}
               className="mb-8 font-bold text-[#D92D20]"
