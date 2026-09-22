@@ -890,7 +890,7 @@ export default function Page() {
                       />
                     </div>
                     <div className="mt-4 h-[3.75rem] overflow-hidden sm:mt-5">
-                      <h2 className="font-serif text-lg font-bold leading-tight sm:text-xl">
+                      <h2 className="font-serif text-lg font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
                     </div>
