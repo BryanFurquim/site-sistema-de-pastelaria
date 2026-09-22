@@ -774,12 +774,15 @@ export default function Page() {
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <button
+            type="button"
+            aria-label={`Abrir sacola${cart.length > 0 ? ` com ${cart.length} item${cart.length === 1 ? "" : "s"}` : ""}`}
+            title="Abrir sacola"
             onClick={() =>
               cart.length > 0 ? setCheckout(true) : setMenu(true)
             }
-            className="relative flex items-center gap-2 rounded-full bg-[#111111] px-4 py-3 text-sm font-bold text-white"
+            className="relative grid size-11 place-items-center rounded-full bg-[#111111] text-white"
           >
-            <ShoppingBag size={17} /> Sacola
+            <ShoppingBag size={19} aria-hidden="true" />
             {cart.length > 0 && (
               <span className="grid size-5 place-items-center rounded-full bg-[#D92D20] text-[10px]">
                 {cart.length}
