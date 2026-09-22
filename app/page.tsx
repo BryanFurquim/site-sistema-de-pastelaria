@@ -784,7 +784,7 @@ export default function Page() {
           >
             <ShoppingBag size={19} aria-hidden="true" />
             {cart.length > 0 && (
-              <span className="grid size-5 place-items-center rounded-full bg-[#D92D20] text-[10px]">
+              <span className="absolute -right-1 -top-1 grid size-5 place-items-center rounded-full bg-[#D92D20] text-[10px] font-bold text-white">
                 {cart.length}
               </span>
             )}
