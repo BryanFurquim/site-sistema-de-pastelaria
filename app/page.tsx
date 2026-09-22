@@ -755,7 +755,7 @@ export default function Page() {
     <>
       <SitePreloader />
       <main className={`min-h-screen ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
-        <header className={`sticky top-0 z-50 flex w-full items-center justify-between px-6 py-[7px] lg:px-10 ${isDarkMode ? "bg-[#111111]" : "bg-[#FFF4C2]"}`}>
+        <header className={`sticky top-0 z-50 flex w-full items-center justify-between px-6 py-[7px] lg:px-10 ${isDarkMode ? "bg-[#111111]" : "bg-[#F5C518]"}`}>
           <a href="#inicio" className="flex items-center gap-3">
             <span className="grid size-14 overflow-hidden rounded-2xl bg-white">
               <img
