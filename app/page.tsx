@@ -755,7 +755,7 @@ export default function Page() {
     <>
       <SitePreloader />
       <main className={`min-h-screen ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
-        <header className={`sticky top-0 z-50 flex w-full items-center justify-between px-6 py-[7px] lg:px-10 ${isDarkMode ? "bg-[#111111]" : "bg-[#FFF4C2]"}`}>
+        <header className={`sticky top-0 z-50 flex w-full items-center justify-between px-6 py-[7px] lg:px-10 ${isDarkMode ? "bg-[#111111]" : "bg-[#F5C518]"}`}>
           <a href="#inicio" className="flex items-center gap-3">
             <span className="grid size-14 overflow-hidden rounded-2xl bg-white">
               <img
@@ -774,14 +774,17 @@ export default function Page() {
               {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <button
+            type="button"
+            aria-label={`Abrir sacola${cart.length > 0 ? ` com ${cart.length} item${cart.length === 1 ? "" : "s"}` : ""}`}
+            title="Abrir sacola"
             onClick={() =>
               cart.length > 0 ? setCheckout(true) : setMenu(true)
             }
-            className="relative flex items-center gap-2 rounded-full bg-[#111111] px-4 py-3 text-sm font-bold text-white"
+            className="relative grid size-11 place-items-center rounded-full bg-[#111111] text-white"
           >
-            <ShoppingBag size={17} /> Sacola
+            <ShoppingBag size={19} aria-hidden="true" />
             {cart.length > 0 && (
-              <span className="grid size-5 place-items-center rounded-full bg-[#D92D20] text-[10px]">
+              <span className="absolute -right-1 -top-1 grid size-5 place-items-center rounded-full bg-[#D92D20] text-[10px] font-bold text-white">
                 {cart.length}
               </span>
             )}
@@ -1001,6 +1004,9 @@ export default function Page() {
             )}
           </section>
         )}
+        <footer className={`px-6 py-8 text-center text-sm font-bold lg:px-10 ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#F5C518] text-[#111111]"}`}>
+          Pastel Boer — feito para dar água na boca.
+        </footer>
       </main>
     </>
   );
