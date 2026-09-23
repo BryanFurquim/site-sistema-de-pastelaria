@@ -1004,9 +1004,6 @@ export default function Page() {
             )}
           </section>
         )}
-        {menu && <footer className={`px-6 py-8 text-center text-sm font-bold lg:px-10 ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#F5C518] text-[#111111]"}`}>
-          Pastel Boer — feito para dar água na boca.
-        </footer>}
       </main>
     </>
   );
