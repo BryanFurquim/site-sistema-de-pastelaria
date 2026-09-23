@@ -795,7 +795,7 @@ export default function Page() {
           <>
             <section
               id="inicio"
-              className="relative h-[calc(100vh-70px)] overflow-hidden bg-[#F5C518] px-6 py-2 text-[#FFF4C2] lg:px-6"
+              className="relative h-screen overflow-hidden bg-[#F5C518] px-6 py-2 text-[#FFF4C2] lg:px-6"
               style={{ paddingTop: '-11px', paddingBottom: '8px' }}
             >
               <div className="mx-auto flex max-w-[1480px] flex-col">
