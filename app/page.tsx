@@ -754,7 +754,7 @@ export default function Page() {
   return (
     <>
       <SitePreloader />
-      <main className={`h-screen overflow-hidden ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
+      <main className={`${menu ? "min-h-screen overflow-y-auto" : "h-screen overflow-hidden"} ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
         <header className={`sticky top-0 z-50 flex h-[70px] w-full shrink-0 items-center justify-between px-3 py-[7px] lg:px-6 ${isDarkMode ? "bg-[#111111]" : "bg-[#F5C518]"}`}>
           <a href="#inicio" className="flex items-center gap-3">
             <span className="grid size-14 overflow-hidden rounded-2xl bg-white">
