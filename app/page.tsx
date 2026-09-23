@@ -755,7 +755,7 @@ export default function Page() {
     <>
       <SitePreloader />
       <main className={`${menu ? "min-h-screen overflow-y-auto" : "h-screen overflow-hidden"} ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
-        <header className={`sticky top-0 z-50 flex h-[70px] w-full shrink-0 items-center justify-between px-3 py-[7px] lg:px-6 ${isDarkMode ? "bg-[#111111]" : "bg-[#F5C518]"}`}>
+        <header className={`fixed top-0 z-50 flex h-[70px] w-full shrink-0 items-center justify-between px-3 py-[7px] lg:px-6 ${isDarkMode ? "bg-[#111111]" : "bg-[#F5C518]"}`}>
           <a href="#inicio" className="flex items-center gap-3">
             <span className="grid size-14 overflow-hidden rounded-2xl bg-white">
               <img
@@ -814,7 +814,7 @@ export default function Page() {
             </section>
           </>
         ) : (
-          <section className={`mx-auto max-w-7xl px-6 py-12 lg:px-10 ${isDarkMode ? "text-[#FFF4C2]" : "text-[#111111]"}`}>
+          <section className={`mx-auto max-w-7xl px-6 pb-12 pt-[94px] lg:px-10 lg:pt-[118px] ${isDarkMode ? "text-[#FFF4C2]" : "text-[#111111]"}`}>
             <button
               onClick={() => setMenu(false)}
               className="mb-8 font-bold text-[#D92D20]"
