@@ -754,8 +754,8 @@ export default function Page() {
   return (
     <>
       <SitePreloader />
-      <main className={`min-h-screen ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
-        <header className={`sticky top-0 z-50 flex w-full items-center justify-between px-6 py-[7px] lg:px-10 ${isDarkMode ? "bg-[#111111]" : "bg-[#F5C518]"}`}>
+      <main className={`h-screen overflow-hidden ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
+        <header className={`sticky top-0 z-50 flex h-[70px] w-full shrink-0 items-center justify-between px-3 py-[7px] lg:px-6 ${isDarkMode ? "bg-[#111111]" : "bg-[#F5C518]"}`}>
           <a href="#inicio" className="flex items-center gap-3">
             <span className="grid size-14 overflow-hidden rounded-2xl bg-white">
               <img
@@ -795,11 +795,11 @@ export default function Page() {
           <>
             <section
               id="inicio"
-              className="relative min-h-[calc(100vh-90px)] overflow-hidden bg-[#F5C518] px-6 py-2 text-[#FFF4C2] lg:px-6"
+              className="relative h-[calc(100vh-70px)] overflow-hidden bg-[#F5C518] px-6 py-2 text-[#FFF4C2] lg:px-6"
               style={{ paddingTop: '-11px', paddingBottom: '8px' }}
             >
               <div className="mx-auto flex max-w-[1480px] flex-col">
-                <div className="relative flex min-h-[calc(100vh-150px)] flex-col justify-center py-5 lg:block lg:py-0" style={{ paddingTop: '17px' }}>
+                <div className="relative flex h-full flex-col justify-center py-3 lg:block lg:py-0" style={{ paddingTop: '17px' }}>
                   <div className="relative z-10 max-w-[390px] lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2">
                     <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em]">Feito para dar água na boca</p>
                     <h1 className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.9] tracking-[-0.046em] lg:text-[clamp(4rem,7.5vw,7rem)]" style={{ fontFamily: 'system-ui' }}>O pastel<br />que <span className="text-[#FFF8EE]">você</span><br />vai lembrar<br />amanhã.</h1>
@@ -1004,9 +1004,9 @@ export default function Page() {
             )}
           </section>
         )}
-        <footer className={`px-6 py-8 text-center text-sm font-bold lg:px-10 ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#F5C518] text-[#111111]"}`}>
+        {menu && <footer className={`px-6 py-8 text-center text-sm font-bold lg:px-10 ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#F5C518] text-[#111111]"}`}>
           Pastel Boer — feito para dar água na boca.
-        </footer>
+        </footer>}
       </main>
     </>
   );
