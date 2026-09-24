@@ -823,7 +823,7 @@ export default function Page() {
           </>
         ) : (
           <section
-            className={`relative isolate min-h-screen overflow-hidden px-6 pb-12 pt-[94px] lg:px-10 lg:pt-[118px] ${isDarkMode ? "bg-[#17120d] text-[#FFF4C2]" : "bg-[#FFF8DD] text-[#111111]"}`}
+            className={`relative isolate min-h-screen overflow-hidden px-4 pb-8 pt-[88px] sm:px-6 sm:pb-12 sm:pt-[94px] lg:px-10 lg:pt-[118px] ${isDarkMode ? "bg-[#17120d] text-[#FFF4C2]" : "bg-[#FFF8DD] text-[#111111]"}`}
             style={{
               backgroundColor: isDarkMode ? "#3a180d" : "#FFF4C2",
               backgroundImage: isDarkMode
@@ -843,7 +843,7 @@ export default function Page() {
             >
               ← Voltar para a casa
             </button>
-            <div className="relative mb-10 overflow-hidden rounded-[2rem] bg-[#F5C518] px-5 py-8 text-[#111111] shadow-[0_14px_0_#D92D20] sm:px-10 sm:py-10">
+            <div className="relative mb-7 overflow-hidden rounded-[1.5rem] bg-[#F5C518] px-4 py-6 text-[#111111] shadow-[0_8px_0_#D92D20] sm:mb-10 sm:rounded-[2rem] sm:px-10 sm:py-10 sm:shadow-[0_14px_0_#D92D20]">
               <div className="absolute -right-8 -top-12 size-36 rounded-full border-[18px] border-[#FFF4C2]/70" aria-hidden="true" />
               <div className="absolute -bottom-16 right-20 size-40 rounded-full border-[18px] border-[#D92D20]/20" aria-hidden="true" />
               <p className="relative mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D92D20]">Pastel Boer</p>
@@ -894,14 +894,14 @@ export default function Page() {
                 ))}
               </div>
             )}
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+            <div className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-8 sm:gap-5 lg:grid-cols-4">
               {visibleProducts.map(
                 ([name, description, price, , , image_url]) => (
 <article
                     key={name}
-                    className="flex h-[380px] flex-col rounded-2xl border border-[#DDE4D9] bg-white p-2.5 text-left transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:p-3"
+                    className="flex h-[332px] flex-col rounded-[1.15rem] border border-[#DDE4D9] bg-white p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none"
                   >
-                    <div className="flex h-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white">
+                    <div className="flex h-[74px] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white sm:h-24 sm:rounded-2xl">
                       <img
                         src={image_url || productImageFor(name)}
                         alt={`Pastel ${name}`}
@@ -914,13 +914,13 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="mt-4 h-[3.75rem] overflow-hidden sm:mt-5">
-                      <h2 className="font-serif text-lg font-bold leading-tight text-[#111111] sm:text-xl">
+                    <div className="mt-3 h-[3.35rem] overflow-hidden sm:mt-5 sm:h-[3.75rem]">
+                      <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
                     </div>
-                    <div className="mt-2 h-[4.5rem] overflow-hidden">
-                      <p className="text-sm leading-5 text-[#5A1A16] sm:leading-6">
+                    <div className="mt-1 h-[3.8rem] overflow-hidden sm:mt-2 sm:h-[4.5rem]">
+                      <p className="text-[0.78rem] leading-5 text-[#5A1A16] sm:text-sm sm:leading-6">
                         {description}
                       </p>
                     </div>
