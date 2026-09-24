@@ -800,7 +800,7 @@ export default function Page() {
             >
               <div className="mx-auto flex max-w-[1480px] flex-col">
                 <div className="relative flex h-full flex-col justify-center py-3 lg:block lg:py-0">
-                  <div className="relative z-10 max-w-[390px] lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2">
+                  <div className="relative z-10 max-w-[390px] translate-y-8 lg:absolute lg:left-0 lg:top-1/2 lg:translate-y-[calc(-50%+36px)]">
                     <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em]">Feito para dar água na boca</p>
                     <h1 className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.9] tracking-[-0.046em] lg:text-[91px]" style={{ fontFamily: 'system-ui' }}>Pastel<br /><span className="text-[#FFF8EE]">que você</span><br />vai lembrar<br />amanhã.</h1>
                     <button onClick={() => setMenu(true)} className="mt-6 inline-flex items-center gap-3 border border-white bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#D92D20] transition hover:bg-[#D92D20] hover:text-white">Conheça nosso cardápio <ArrowRight size={16} /></button>
