@@ -795,11 +795,11 @@ export default function Page() {
           <>
             <section
               id="inicio"
-              className="relative h-screen overflow-hidden bg-[#F5C518] px-6 py-2 text-[#FFF4C2] lg:px-6"
-              style={{ paddingTop: '-11px', paddingBottom: '8px' }}
+              className="relative box-border h-screen overflow-hidden bg-[#F5C518] px-6 pb-2 pt-[70px] text-[#FFF4C2] lg:px-6"
+              style={{ paddingBottom: '8px' }}
             >
               <div className="mx-auto flex max-w-[1480px] flex-col">
-                <div className="relative flex h-full flex-col justify-center py-3 lg:block lg:py-0" style={{ paddingTop: '17px' }}>
+                <div className="relative flex h-full flex-col justify-center py-3 lg:block lg:py-0">
                   <div className="relative z-10 max-w-[390px] lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2">
                     <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em]">Feito para dar água na boca</p>
                     <h1 className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.9] tracking-[-0.046em] lg:text-[91px]" style={{ fontFamily: 'system-ui' }}>Pastel<br /><span className="text-[#FFF8EE]">que você</span><br />vai lembrar<br />amanhã.</h1>
