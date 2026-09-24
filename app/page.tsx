@@ -825,10 +825,13 @@ export default function Page() {
           <section
             className={`relative isolate min-h-screen overflow-hidden px-6 pb-12 pt-[94px] lg:px-10 lg:pt-[118px] ${isDarkMode ? "bg-[#17120d] text-[#FFF4C2]" : "bg-[#FFF8DD] text-[#111111]"}`}
             style={{
+              backgroundColor: isDarkMode ? "#3a180d" : "#FFF4C2",
               backgroundImage: isDarkMode
-                ? "radial-gradient(circle at 8% 16%, rgba(245,197,24,.12) 0 3px, transparent 4px), radial-gradient(circle at 92% 42%, rgba(217,45,32,.18) 0 4px, transparent 5px), linear-gradient(135deg, rgba(245,197,24,.05) 25%, transparent 25%, transparent 75%, rgba(245,197,24,.05) 75%)"
-                : "radial-gradient(circle at 8% 16%, rgba(217,45,32,.14) 0 3px, transparent 4px), radial-gradient(circle at 92% 42%, rgba(245,197,24,.38) 0 4px, transparent 5px), linear-gradient(135deg, rgba(245,197,24,.12) 25%, transparent 25%, transparent 75%, rgba(245,197,24,.12) 75%)",
-              backgroundSize: "38px 38px, 52px 52px, 22px 22px",
+                ? "linear-gradient(rgba(23, 18, 13, .78), rgba(23, 18, 13, .78)), url('/pastel-pattern.png')"
+                : "linear-gradient(rgba(255, 244, 194, .86), rgba(255, 244, 194, .86)), url('/pastel-pattern.png')",
+              backgroundBlendMode: "normal, multiply",
+              backgroundSize: "auto, 430px auto",
+              backgroundRepeat: "repeat",
             }}
           >
             <div className="pointer-events-none absolute -left-24 top-36 -z-10 size-64 rounded-full border-[28px] border-[#D92D20]/10" aria-hidden="true" />
