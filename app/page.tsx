@@ -822,7 +822,18 @@ export default function Page() {
             </section>
           </>
         ) : (
-          <section className={`mx-auto max-w-7xl px-6 pb-12 pt-[94px] lg:px-10 lg:pt-[118px] ${isDarkMode ? "text-[#FFF4C2]" : "text-[#111111]"}`}>
+          <section
+            className={`relative isolate min-h-screen overflow-hidden px-6 pb-12 pt-[94px] lg:px-10 lg:pt-[118px] ${isDarkMode ? "bg-[#17120d] text-[#FFF4C2]" : "bg-[#FFF8DD] text-[#111111]"}`}
+            style={{
+              backgroundImage: isDarkMode
+                ? "radial-gradient(circle at 8% 16%, rgba(245,197,24,.12) 0 3px, transparent 4px), radial-gradient(circle at 92% 42%, rgba(217,45,32,.18) 0 4px, transparent 5px), linear-gradient(135deg, rgba(245,197,24,.05) 25%, transparent 25%, transparent 75%, rgba(245,197,24,.05) 75%)"
+                : "radial-gradient(circle at 8% 16%, rgba(217,45,32,.14) 0 3px, transparent 4px), radial-gradient(circle at 92% 42%, rgba(245,197,24,.38) 0 4px, transparent 5px), linear-gradient(135deg, rgba(245,197,24,.12) 25%, transparent 25%, transparent 75%, rgba(245,197,24,.12) 75%)",
+              backgroundSize: "38px 38px, 52px 52px, 22px 22px",
+            }}
+          >
+            <div className="pointer-events-none absolute -left-24 top-36 -z-10 size-64 rounded-full border-[28px] border-[#D92D20]/10" aria-hidden="true" />
+            <div className="pointer-events-none absolute -right-28 bottom-24 -z-10 size-80 rounded-full border-[34px] border-[#F5C518]/20" aria-hidden="true" />
+            <div className="relative z-10">
             <button
               onClick={() => setMenu(false)}
               className="mb-8 font-bold text-[#D92D20]"
@@ -1010,6 +1021,7 @@ export default function Page() {
                 )}
               </div>
             )}
+            </div>
           </section>
         )}
       </main>
