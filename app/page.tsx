@@ -201,15 +201,23 @@ export default function Page() {
     const preload = (src: string) => {
       const image = new window.Image();
       image.decoding = "async";
+      image.fetchPriority = "high";
       image.src = src;
     };
-    const preloadVisibleSlides = () => heroSlides.slice(0, 4).forEach((slide) => preload(slide.image));
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(preloadVisibleSlides);
-    } else {
-      window.setTimeout(preloadVisibleSlides, 0);
-    }
+
+    heroSlides.forEach((slide) => preload(slide.image));
   }, []);
+
+  useEffect(() => {
+    const nextIndex = (heroFlavor + 1) % heroSlides.length;
+    const previousIndex = (heroFlavor - 1 + heroSlides.length) % heroSlides.length;
+    [heroSlides[nextIndex], heroSlides[previousIndex]].forEach((slide) => {
+      const image = new window.Image();
+      image.decoding = "async";
+      image.fetchPriority = "high";
+      image.src = slide.image;
+    });
+  }, [heroFlavor]);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeSavory, setActiveSavory] = useState("Carne");
   const [cart, setCart] = useState<string[]>([]);
