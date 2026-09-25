@@ -201,23 +201,15 @@ export default function Page() {
     const preload = (src: string) => {
       const image = new window.Image();
       image.decoding = "async";
-      image.fetchPriority = "high";
       image.src = src;
     };
-
-    heroSlides.forEach((slide) => preload(slide.image));
+    const preloadVisibleSlides = () => heroSlides.slice(0, 4).forEach((slide) => preload(slide.image));
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(preloadVisibleSlides);
+    } else {
+      window.setTimeout(preloadVisibleSlides, 0);
+    }
   }, []);
-
-  useEffect(() => {
-    const nextIndex = (heroFlavor + 1) % heroSlides.length;
-    const previousIndex = (heroFlavor - 1 + heroSlides.length) % heroSlides.length;
-    [heroSlides[nextIndex], heroSlides[previousIndex]].forEach((slide) => {
-      const image = new window.Image();
-      image.decoding = "async";
-      image.fetchPriority = "high";
-      image.src = slide.image;
-    });
-  }, [heroFlavor]);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeSavory, setActiveSavory] = useState("Carne");
   const [cart, setCart] = useState<string[]>([]);
@@ -803,12 +795,12 @@ export default function Page() {
           <>
             <section
               id="inicio"
-              className="relative box-border h-screen overflow-hidden bg-[#F5C518] px-6 pb-2 pt-[70px] text-[#FFF4C2] lg:px-6"
-              style={{ paddingBottom: '8px' }}
+              className="relative h-[calc(100vh-70px)] overflow-hidden bg-[#F5C518] px-6 py-2 text-[#FFF4C2] lg:px-6"
+              style={{ paddingTop: '-11px', paddingBottom: '8px' }}
             >
               <div className="mx-auto flex max-w-[1480px] flex-col">
-                <div className="relative flex h-full flex-col justify-center py-3 lg:block lg:py-0">
-                  <div className="relative z-10 max-w-[390px] translate-y-1 lg:absolute lg:left-0 lg:top-1/2 lg:translate-y-[calc(-50%+36px)]">
+                <div className="relative flex h-full flex-col justify-center py-3 lg:block lg:py-0" style={{ paddingTop: '17px' }}>
+                  <div className="relative z-10 max-w-[390px] lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2">
                     <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em]">Feito para dar água na boca</p>
                     <h1 className="font-sans max-w-[300px] text-[clamp(3.1rem,13.5vw,8.5rem)] font-black uppercase leading-[0.9] tracking-[-0.046em] lg:text-[91px]" style={{ fontFamily: 'system-ui' }}>Pastel<br /><span className="text-[#FFF8EE]">que você</span><br />vai lembrar<br />amanhã.</h1>
                     <button onClick={() => setMenu(true)} className="mt-6 inline-flex items-center gap-3 border border-white bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#D92D20] transition hover:bg-[#D92D20] hover:text-white">Conheça nosso cardápio <ArrowRight size={16} /></button>
@@ -822,28 +814,14 @@ export default function Page() {
             </section>
           </>
         ) : (
-          <section
-            className={`relative isolate min-h-screen overflow-hidden px-4 pb-8 pt-[88px] sm:px-6 sm:pb-12 sm:pt-[94px] lg:px-10 lg:pt-[118px] ${isDarkMode ? "bg-[#17120d] text-[#FFF4C2]" : "bg-[#FFF8DD] text-[#111111]"}`}
-            style={{
-              backgroundColor: isDarkMode ? "#3a180d" : "#FFF4C2",
-              backgroundImage: isDarkMode
-                ? "linear-gradient(rgba(23, 18, 13, .78), rgba(23, 18, 13, .78)), url('/pastel-pattern.png')"
-                : "linear-gradient(rgba(255, 244, 194, .86), rgba(255, 244, 194, .86)), url('/pastel-pattern.png')",
-              backgroundBlendMode: "normal, multiply",
-              backgroundSize: "auto, 430px auto",
-              backgroundRepeat: "repeat",
-            }}
-          >
-            <div className="pointer-events-none absolute -left-24 top-36 -z-10 size-64 rounded-full border-[28px] border-[#D92D20]/10" aria-hidden="true" />
-            <div className="pointer-events-none absolute -right-28 bottom-24 -z-10 size-80 rounded-full border-[34px] border-[#F5C518]/20" aria-hidden="true" />
-            <div className="relative z-10">
+          <section className={`mx-auto max-w-7xl px-6 pb-12 pt-[94px] lg:px-10 lg:pt-[118px] ${isDarkMode ? "text-[#FFF4C2]" : "text-[#111111]"}`}>
             <button
               onClick={() => setMenu(false)}
               className="mb-8 font-bold text-[#D92D20]"
             >
               ← Voltar para a casa
             </button>
-            <div className="relative mb-7 overflow-hidden rounded-[1.5rem] bg-[#F5C518] px-4 py-6 text-[#111111] shadow-[0_8px_0_#D92D20] sm:mb-10 sm:rounded-[2rem] sm:px-10 sm:py-10 sm:shadow-[0_14px_0_#D92D20]">
+            <div className="relative mb-10 overflow-hidden rounded-[2rem] bg-[#F5C518] px-5 py-8 text-[#111111] shadow-[0_14px_0_#D92D20] sm:px-10 sm:py-10">
               <div className="absolute -right-8 -top-12 size-36 rounded-full border-[18px] border-[#FFF4C2]/70" aria-hidden="true" />
               <div className="absolute -bottom-16 right-20 size-40 rounded-full border-[18px] border-[#D92D20]/20" aria-hidden="true" />
               <p className="relative mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D92D20]">Pastel Boer</p>
@@ -894,14 +872,14 @@ export default function Page() {
                 ))}
               </div>
             )}
-            <div className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-8 sm:gap-5 lg:grid-cols-4">
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
               {visibleProducts.map(
                 ([name, description, price, , , image_url]) => (
 <article
                     key={name}
-                    className="flex h-[332px] flex-col rounded-[1.15rem] border border-[#DDE4D9] bg-white p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none"
+                    className="flex h-[380px] flex-col rounded-2xl border border-[#DDE4D9] bg-white p-2.5 text-left transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:p-3"
                   >
-                    <div className="flex h-[74px] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white sm:h-24 sm:rounded-2xl">
+                    <div className="flex h-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white">
                       <img
                         src={image_url || productImageFor(name)}
                         alt={`Pastel ${name}`}
@@ -914,13 +892,13 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="mt-3 h-[3.35rem] overflow-hidden sm:mt-5 sm:h-[3.75rem]">
-                      <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
+                    <div className="mt-4 h-[3.75rem] overflow-hidden sm:mt-5">
+                      <h2 className="font-serif text-lg font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
                     </div>
-                    <div className="mt-1 h-[3.8rem] overflow-hidden sm:mt-2 sm:h-[4.5rem]">
-                      <p className="text-[0.78rem] leading-5 text-[#5A1A16] sm:text-sm sm:leading-6">
+                    <div className="mt-2 h-[4.5rem] overflow-hidden">
+                      <p className="text-sm leading-5 text-[#5A1A16] sm:leading-6">
                         {description}
                       </p>
                     </div>
@@ -1024,9 +1002,11 @@ export default function Page() {
                 )}
               </div>
             )}
-            </div>
           </section>
         )}
+        {menu && <footer className={`px-6 py-8 text-center text-sm font-bold lg:px-10 ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#F5C518] text-[#111111]"}`}>
+          Pastel Boer — feito para dar água na boca.
+        </footer>}
       </main>
     </>
   );
