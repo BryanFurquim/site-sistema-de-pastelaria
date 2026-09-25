@@ -919,7 +919,7 @@ export default function Page() {
                         {name}
                       </h2>
                     </div>
-                    <div className="mt-0 h-[25px] overflow-hidden sm:mt-1 sm:h-[4.5rem]">
+                    <div className="mt-2 h-[25px] overflow-hidden sm:mt-1 sm:h-[4.5rem]">
                       <p className="text-[0.78rem] leading-5 text-[#5A1A16] sm:text-sm sm:leading-6">
                         {description}
                       </p>
@@ -929,7 +929,7 @@ export default function Page() {
                         {price}
                       </strong>
                     </div>
-                    <div className="mt-auto flex h-[42px] w-fit shrink-0 items-center justify-center self-start rounded-xl bg-[#FFF4C2] px-2 py-1.5 sm:px-3 sm:py-2">
+                    <div className="flex h-[42px] w-fit shrink-0 items-center justify-center self-start rounded-xl bg-[#FFF4C2] px-2 py-1.5 sm:px-3 sm:py-2">
                       <div className="flex items-center gap-3">
                         <button type="button" aria-label={`Remover ${name}`} onClick={() => decreaseFromCart(name)} className="grid size-8 place-items-center rounded-full bg-[#D92D20] text-lg font-black text-white">−</button>
                         <strong className="min-w-5 text-center text-lg text-[#111111]">{quantityFor(name)}</strong>
