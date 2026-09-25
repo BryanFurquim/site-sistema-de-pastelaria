@@ -868,7 +868,7 @@ export default function Page() {
                   aria-selected={activeCategory === value}
                   key={value}
                   onClick={() => setActiveCategory(value)}
-                  className={`whitespace-nowrap rounded-full px-5 py-3 text-sm font-bold transition ${activeCategory === value ? "bg-[#D92D20] text-white" : "bg-[#FFF4C2] text-[#111111] hover:bg-[#F5C518]"}`}
+                  className={`whitespace-nowrap rounded-full px-5 py-3 text-sm font-bold transition ${activeCategory === value ? "bg-[#D92D20] text-white" : isDarkMode ? "bg-[#3a2418] text-[#FFF4C2] hover:bg-[#5A1A16]" : "bg-[#FFF4C2] text-[#111111] hover:bg-[#F5C518]"}`}
                 >
                   {label}
                 </button>
@@ -878,7 +878,7 @@ export default function Page() {
               <div
                 role="tablist"
                 aria-label="Sabores de pastéis salgados"
-                className="mt-5 flex gap-2 overflow-x-auto border-b border-[#DDE4D9] pb-3"
+                className={`mt-5 flex gap-2 overflow-x-auto border-b pb-3 ${isDarkMode ? "border-[#FFF4C2]/20" : "border-[#DDE4D9]"}`}
               >
                 {savoryFlavors.map((flavor) => (
                   <button
@@ -899,9 +899,9 @@ export default function Page() {
                 ([name, description, price, , , image_url]) => (
 <article
                     key={name}
-                    className="flex h-[332px] flex-col rounded-[1.15rem] border border-[#DDE4D9] bg-white p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none"
+                    className={`flex h-[332px] flex-col rounded-[1.15rem] border p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none ${isDarkMode ? "border-[#F5C518]/20 bg-[#FFF4C2]" : "border-[#DDE4D9] bg-white"}`}
                   >
-                    <div className="flex h-[74px] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white sm:h-24 sm:rounded-2xl">
+                    <div className="flex h-[122px] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white sm:h-32 sm:rounded-2xl">
                       <img
                         src={image_url || productImageFor(name)}
                         alt={`Pastel ${name}`}
@@ -914,12 +914,12 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="mt-3 h-[3.35rem] overflow-hidden sm:mt-5 sm:h-[3.75rem]">
+                    <div className="mt-2 h-[3.1rem] overflow-hidden sm:mt-4 sm:h-[3.75rem]">
                       <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
                     </div>
-                    <div className="mt-1 h-[3.8rem] overflow-hidden sm:mt-2 sm:h-[4.5rem]">
+                    <div className="mt-0.5 h-[3.3rem] overflow-hidden sm:mt-1 sm:h-[4.5rem]">
                       <p className="text-[0.78rem] leading-5 text-[#5A1A16] sm:text-sm sm:leading-6">
                         {description}
                       </p>
