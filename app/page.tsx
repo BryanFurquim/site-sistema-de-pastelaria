@@ -899,7 +899,7 @@ export default function Page() {
                 ([name, description, price, , , image_url]) => (
 <article
                     key={name}
-                    className={`flex h-[332px] flex-col rounded-[1.15rem] border p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none ${isDarkMode ? "border-[#F5C518]/20 bg-[#FFF4C2]" : "border-[#DDE4D9] bg-white"}`}
+                    className={`flex h-[297px] flex-col rounded-[1.15rem] border p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none ${isDarkMode ? "border-[#F5C518]/20 bg-[#FFF4C2]" : "border-[#DDE4D9] bg-white"}`}
                   >
                     <div className="flex h-[122px] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white sm:h-32 sm:rounded-2xl">
                       <img
@@ -914,7 +914,7 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="mt-0.5 h-[28px] overflow-hidden sm:mt-2 sm:h-[3.75rem]">
+                    <div className="mb-[10px] mt-0.5 h-[28px] overflow-hidden sm:mt-2 sm:h-[3.75rem]">
                       <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
