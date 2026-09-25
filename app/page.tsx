@@ -843,10 +843,10 @@ export default function Page() {
             >
               ← Voltar para a casa
             </button>
-            <div className={`relative mb-7 overflow-hidden rounded-[1.5rem] px-4 py-6 shadow-[0_8px_0_#D92D20] sm:mb-10 sm:rounded-[2rem] sm:px-10 sm:py-10 sm:shadow-[0_14px_0_#D92D20] ${isDarkMode ? "bg-[#24170D] text-[#FFF4C2]" : "bg-[#F5C518] text-[#111111]"}`}>
+            <div className="relative mb-7 overflow-hidden rounded-[1.5rem] bg-[#F5C518] px-4 py-6 text-[#111111] shadow-[0_8px_0_#D92D20] sm:mb-10 sm:rounded-[2rem] sm:px-10 sm:py-10 sm:shadow-[0_14px_0_#D92D20]">
               <div className="absolute -right-8 -top-12 size-36 rounded-full border-[18px] border-[#FFF4C2]/70" aria-hidden="true" />
               <div className="absolute -bottom-16 right-20 size-40 rounded-full border-[18px] border-[#D92D20]/20" aria-hidden="true" />
-              <p className={`relative mb-3 text-xs font-bold uppercase tracking-[0.18em] ${isDarkMode ? "text-[#F5C518]" : "text-[#D92D20]"}`}>Pastel Boer</p>
+              <p className="relative mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D92D20]">Pastel Boer</p>
               <h1 className="relative max-w-[620px] text-4xl font-extrabold uppercase leading-[0.95] tracking-[-0.04em] sm:text-6xl" style={{ fontFamily: "'Poppins', sans-serif" }}>
                 Escolha o seu favorito.
               </h1>
@@ -868,7 +868,7 @@ export default function Page() {
                   aria-selected={activeCategory === value}
                   key={value}
                   onClick={() => setActiveCategory(value)}
-                  className={`whitespace-nowrap rounded-full px-5 py-3 text-sm font-bold transition ${activeCategory === value ? "bg-[#D92D20] text-white" : isDarkMode ? "bg-[#3a2418] text-[#FFF4C2] hover:bg-[#5A1A16]" : "bg-[#FFF4C2] text-[#111111] hover:bg-[#F5C518]"}`}
+                  className={`whitespace-nowrap rounded-full px-5 py-3 text-sm font-bold transition ${activeCategory === value ? "bg-[#D92D20] text-white" : "bg-[#FFF4C2] text-[#111111] hover:bg-[#F5C518]"}`}
                 >
                   {label}
                 </button>
@@ -878,7 +878,7 @@ export default function Page() {
               <div
                 role="tablist"
                 aria-label="Sabores de pastéis salgados"
-                className={`mt-5 flex gap-2 overflow-x-auto border-b pb-3 ${isDarkMode ? "border-[#FFF4C2]/20" : "border-[#DDE4D9]"}`}
+                className="mt-5 flex gap-2 overflow-x-auto border-b border-[#DDE4D9] pb-3"
               >
                 {savoryFlavors.map((flavor) => (
                   <button
@@ -887,21 +887,21 @@ export default function Page() {
                     aria-selected={activeSavory === flavor}
                     key={flavor}
                     onClick={() => setActiveSavory(flavor)}
-                    className={`whitespace-nowrap px-3 py-2 text-sm font-bold ${activeSavory === flavor ? "border-b-2 border-[#D92D20] text-[#D92D20]" : isDarkMode ? "text-[#FFF4C2]/70 hover:text-[#FFF4C2]" : "text-[#5A1A16] hover:text-[#111111]"}`}
+                    className={`whitespace-nowrap px-3 py-2 text-sm font-bold ${activeSavory === flavor ? "border-b-2 border-[#D92D20] text-[#D92D20]" : "text-[#5A1A16] hover:text-[#111111]"}`}
                   >
                     {flavor}
                   </button>
                 ))}
               </div>
             )}
-            <div className="mt-4 grid grid-cols-2 gap-2.5 sm:mt-8 sm:gap-5 lg:grid-cols-4">
+            <div className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-8 sm:gap-5 lg:grid-cols-4">
               {visibleProducts.map(
                 ([name, description, price, , , image_url]) => (
 <article
                     key={name}
-                    className={`flex h-[297px] flex-col rounded-[1.15rem] border p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none ${isDarkMode ? "border-[#F5C518]/20 bg-[#FFF4C2]" : "border-[#DDE4D9] bg-white"}`}
+                    className="flex h-[332px] flex-col rounded-[1.15rem] border border-[#DDE4D9] bg-white p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none"
                   >
-                    <div className="flex h-[122px] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white sm:h-32 sm:rounded-2xl">
+                    <div className="flex h-[74px] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white sm:h-24 sm:rounded-2xl">
                       <img
                         src={image_url || productImageFor(name)}
                         alt={`Pastel ${name}`}
@@ -914,22 +914,22 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="relative z-10 -mt-2 mb-[10px] h-[28px] overflow-hidden rounded-md bg-[#FFF4C2] px-1 py-0.5 sm:mt-2 sm:h-[3.75rem] sm:rounded-none sm:bg-transparent sm:px-0 sm:py-0">
+                    <div className="mt-3 h-[3.35rem] overflow-hidden sm:mt-5 sm:h-[3.75rem]">
                       <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
                     </div>
-                    <div className="mt-2 h-[25px] overflow-hidden sm:mt-1 sm:h-[4.5rem]">
+                    <div className="mt-1 h-[3.8rem] overflow-hidden sm:mt-2 sm:h-[4.5rem]">
                       <p className="text-[0.78rem] leading-5 text-[#5A1A16] sm:text-sm sm:leading-6">
                         {description}
                       </p>
                     </div>
-                    <div className="mt-0 min-h-[1.45rem] sm:min-h-[1.75rem]">
+                    <div className="mt-3 min-h-[1.75rem]">
                       <strong className="block text-[#D92D20]">
                         {price}
                       </strong>
                     </div>
-                    <div className="flex h-[42px] w-fit shrink-0 items-center justify-center self-start rounded-xl bg-[#FFF4C2] px-2 py-1.5 sm:px-3 sm:py-2">
+                    <div className="mt-auto flex h-[42px] w-fit shrink-0 items-center justify-center self-start rounded-xl bg-[#FFF4C2] px-2 py-1.5 sm:px-3 sm:py-2">
                       <div className="flex items-center gap-3">
                         <button type="button" aria-label={`Remover ${name}`} onClick={() => decreaseFromCart(name)} className="grid size-8 place-items-center rounded-full bg-[#D92D20] text-lg font-black text-white">−</button>
                         <strong className="min-w-5 text-center text-lg text-[#111111]">{quantityFor(name)}</strong>
