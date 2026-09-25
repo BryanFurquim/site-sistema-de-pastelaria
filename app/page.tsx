@@ -843,7 +843,7 @@ export default function Page() {
             >
               ← Voltar para a casa
             </button>
-            <div className={`relative mb-7 overflow-hidden rounded-[1.5rem] px-4 py-6 shadow-[0_8px_0_#D92D20] sm:mb-10 sm:rounded-[2rem] sm:px-10 sm:py-10 sm:shadow-[0_14px_0_#D92D20] ${isDarkMode ? "bg-[#5A1A16] text-[#FFF4C2]" : "bg-[#F5C518] text-[#111111]"}`}>
+            <div className={`relative mb-7 overflow-hidden rounded-[1.5rem] px-4 py-6 shadow-[0_8px_0_#D92D20] sm:mb-10 sm:rounded-[2rem] sm:px-10 sm:py-10 sm:shadow-[0_14px_0_#D92D20] ${isDarkMode ? "bg-[#24170D] text-[#FFF4C2]" : "bg-[#F5C518] text-[#111111]"}`}>
               <div className="absolute -right-8 -top-12 size-36 rounded-full border-[18px] border-[#FFF4C2]/70" aria-hidden="true" />
               <div className="absolute -bottom-16 right-20 size-40 rounded-full border-[18px] border-[#D92D20]/20" aria-hidden="true" />
               <p className={`relative mb-3 text-xs font-bold uppercase tracking-[0.18em] ${isDarkMode ? "text-[#F5C518]" : "text-[#D92D20]"}`}>Pastel Boer</p>
@@ -894,7 +894,7 @@ export default function Page() {
                 ))}
               </div>
             )}
-            <div className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-8 sm:gap-5 lg:grid-cols-4">
+            <div className="mt-4 grid grid-cols-2 gap-2.5 sm:mt-8 sm:gap-5 lg:grid-cols-4">
               {visibleProducts.map(
                 ([name, description, price, , , image_url]) => (
 <article
@@ -914,17 +914,17 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="mt-1 h-[3.1rem] overflow-hidden sm:mt-2 sm:h-[3.75rem]">
+                    <div className="mt-0.5 h-[2.45rem] overflow-hidden sm:mt-2 sm:h-[3.75rem]">
                       <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
                     </div>
-                    <div className="mt-0.5 h-[3.3rem] overflow-hidden sm:mt-1 sm:h-[4.5rem]">
+                    <div className="mt-0 h-[2.7rem] overflow-hidden sm:mt-1 sm:h-[4.5rem]">
                       <p className="text-[0.78rem] leading-5 text-[#5A1A16] sm:text-sm sm:leading-6">
                         {description}
                       </p>
                     </div>
-                    <div className="mt-1 min-h-[1.75rem]">
+                    <div className="mt-0 min-h-[1.45rem] sm:min-h-[1.75rem]">
                       <strong className="block text-[#D92D20]">
                         {price}
                       </strong>
