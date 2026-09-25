@@ -914,12 +914,12 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="mt-0.5 h-[2.45rem] overflow-hidden sm:mt-2 sm:h-[3.75rem]">
+                    <div className="mt-0.5 h-[28px] overflow-hidden sm:mt-2 sm:h-[3.75rem]">
                       <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
                     </div>
-                    <div className="mt-0 h-[2.7rem] overflow-hidden sm:mt-1 sm:h-[4.5rem]">
+                    <div className="mt-0 h-[25px] overflow-hidden sm:mt-1 sm:h-[4.5rem]">
                       <p className="text-[0.78rem] leading-5 text-[#5A1A16] sm:text-sm sm:leading-6">
                         {description}
                       </p>
