@@ -843,10 +843,10 @@ export default function Page() {
             >
               ← Voltar para a casa
             </button>
-            <div className="relative mb-7 overflow-hidden rounded-[1.5rem] bg-[#F5C518] px-4 py-6 text-[#111111] shadow-[0_8px_0_#D92D20] sm:mb-10 sm:rounded-[2rem] sm:px-10 sm:py-10 sm:shadow-[0_14px_0_#D92D20]">
+            <div className={`relative mb-7 overflow-hidden rounded-[1.5rem] px-4 py-6 shadow-[0_8px_0_#D92D20] sm:mb-10 sm:rounded-[2rem] sm:px-10 sm:py-10 sm:shadow-[0_14px_0_#D92D20] ${isDarkMode ? "bg-[#5A1A16] text-[#FFF4C2]" : "bg-[#F5C518] text-[#111111]"}`}>
               <div className="absolute -right-8 -top-12 size-36 rounded-full border-[18px] border-[#FFF4C2]/70" aria-hidden="true" />
               <div className="absolute -bottom-16 right-20 size-40 rounded-full border-[18px] border-[#D92D20]/20" aria-hidden="true" />
-              <p className="relative mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D92D20]">Pastel Boer</p>
+              <p className={`relative mb-3 text-xs font-bold uppercase tracking-[0.18em] ${isDarkMode ? "text-[#F5C518]" : "text-[#D92D20]"}`}>Pastel Boer</p>
               <h1 className="relative max-w-[620px] text-4xl font-extrabold uppercase leading-[0.95] tracking-[-0.04em] sm:text-6xl" style={{ fontFamily: "'Poppins', sans-serif" }}>
                 Escolha o seu favorito.
               </h1>
@@ -887,7 +887,7 @@ export default function Page() {
                     aria-selected={activeSavory === flavor}
                     key={flavor}
                     onClick={() => setActiveSavory(flavor)}
-                    className={`whitespace-nowrap px-3 py-2 text-sm font-bold ${activeSavory === flavor ? "border-b-2 border-[#D92D20] text-[#D92D20]" : "text-[#5A1A16] hover:text-[#111111]"}`}
+                    className={`whitespace-nowrap px-3 py-2 text-sm font-bold ${activeSavory === flavor ? "border-b-2 border-[#D92D20] text-[#D92D20]" : isDarkMode ? "text-[#FFF4C2]/70 hover:text-[#FFF4C2]" : "text-[#5A1A16] hover:text-[#111111]"}`}
                   >
                     {flavor}
                   </button>
@@ -914,7 +914,7 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="mt-2 h-[3.1rem] overflow-hidden sm:mt-4 sm:h-[3.75rem]">
+                    <div className="mt-1 h-[3.1rem] overflow-hidden sm:mt-2 sm:h-[3.75rem]">
                       <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
@@ -924,7 +924,7 @@ export default function Page() {
                         {description}
                       </p>
                     </div>
-                    <div className="mt-3 min-h-[1.75rem]">
+                    <div className="mt-1 min-h-[1.75rem]">
                       <strong className="block text-[#D92D20]">
                         {price}
                       </strong>
