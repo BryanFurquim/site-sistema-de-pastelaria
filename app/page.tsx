@@ -608,12 +608,9 @@ export default function Page() {
           <p className="text-sm font-bold uppercase tracking-[.2em] text-[#F5C518]">
             Finalizar pedido
           </p>
-          <h1 className="mt-3 font-serif text-5xl font-bold">
-            S�� falta identificar você.
+<h1 className="mt-3 max-w-[18rem] font-sans text-3xl font-[1300] leading-[1.05] tracking-[-0.03em] text-[darkred] sm:text-4xl">
+            Preencha seus dados para preparar o pedido.
           </h1>
-          <p className="mt-4 leading-7 text-[#FFF4C2]/80">
-            Preencha seus dados para enviarmos o pedido para a cozinha.
-          </p>
           <div className="mt-8 rounded-3xl border border-[#F5C518]/20 bg-white p-5 text-[#111111]">
             <div className="flex items-center justify-between">
               <h2 className="font-bold uppercase tracking-wider">Sua sacola</h2>
@@ -899,7 +896,7 @@ export default function Page() {
                 ([name, description, price, , , image_url]) => (
 <article
                     key={name}
-                    className={`flex h-[297px] flex-col rounded-[1.15rem] border p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none ${isDarkMode ? "border-[#F5C518]/20 bg-[#FFF4C2]" : "border-[#DDE4D9] bg-white"}`}
+                    className={`flex h-[262px] flex-col rounded-[1.15rem] border p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none ${isDarkMode ? "border-[#F5C518]/20 bg-[#FFF4C2]" : "border-[#DDE4D9] bg-white"}`}
                   >
                     <div className="flex h-[122px] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white sm:h-32 sm:rounded-2xl">
                       <img
@@ -914,7 +911,7 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="relative z-10 -mt-2 mb-[10px] h-[28px] overflow-hidden rounded-md bg-[#FFF4C2] px-1 py-0.5 sm:mt-2 sm:h-[3.75rem] sm:rounded-none sm:bg-transparent sm:px-0 sm:py-0">
+                    <div className="relative z-30 -mt-2 mb-[10px] min-h-[28px] overflow-visible rounded-md bg-[#FFF4C2] px-1 py-0.5 sm:mt-2 sm:min-h-[3.75rem] sm:rounded-none sm:bg-transparent sm:px-0 sm:py-0">
                       <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
