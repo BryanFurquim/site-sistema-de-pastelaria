@@ -608,9 +608,9 @@ export default function Page() {
           <p className="text-sm font-bold uppercase tracking-[.2em] text-[#F5C518]">
             Finalizar pedido
           </p>
-<h1 className="mt-3 font-serif text-5xl font-bold text-[#D92D20]">
-  Preencha as informações para iniciar o preparo do seu pedido.
-  </h1>
+<h1 className="mt-3 max-w-[18rem] font-sans text-3xl font-extrabold leading-[1.05] tracking-[-0.03em] text-[#D92D20] sm:text-4xl">
+            Preencha seus dados para preparar o pedido.
+          </h1>
           <div className="mt-8 rounded-3xl border border-[#F5C518]/20 bg-white p-5 text-[#111111]">
             <div className="flex items-center justify-between">
               <h2 className="font-bold uppercase tracking-wider">Sua sacola</h2>
