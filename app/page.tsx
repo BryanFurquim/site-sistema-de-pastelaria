@@ -608,9 +608,15 @@ export default function Page() {
           <p className="text-sm font-bold uppercase tracking-[.2em] text-[#F5C518]">
             Finalizar pedido
           </p>
-<h1 className="mt-3 max-w-[19rem] font-serif text-3xl font-black leading-[1.05] tracking-[-0.025em] text-[darkred] sm:text-4xl">
-            Preencha seus dados para preparar o pedido.
-          </h1>
+<div className="relative mt-3 overflow-hidden rounded-[1.75rem] border-b-4 border-[#D92D20] bg-[#F5C518] px-5 py-5 text-[#111111] shadow-[0_8px_0_rgba(217,45,32,.16)] sm:px-7 sm:py-6">
+            <div className="pointer-events-none absolute -right-8 -top-10 size-28 rounded-full border-[16px] border-[#FFF4C2]/70" aria-hidden="true" />
+            <div className="pointer-events-none absolute -bottom-12 left-24 size-24 rounded-full border-[14px] border-[#D92D20]/15" aria-hidden="true" />
+            <p className="relative text-[0.65rem] font-black uppercase tracking-[0.24em] text-[#D92D20]">Pastel Boer</p>
+            <h1 className="relative mt-2 max-w-[19rem] font-sans text-2xl font-black uppercase leading-[1.05] tracking-[-0.035em] text-[#111111] sm:text-3xl">
+              Preencha seus dados para preparar o pedido.
+            </h1>
+            <p className="relative mt-2 max-w-[16rem] text-xs font-bold leading-4 text-[#5A1A16]">Assim a cozinha já começa a preparar seu pastel.</p>
+          </div>
           <div className="mt-8 rounded-3xl border border-[#F5C518]/20 bg-white p-5 text-[#111111]">
             <div className="flex items-center justify-between">
               <h2 className="font-bold uppercase tracking-wider">Sua sacola</h2>
