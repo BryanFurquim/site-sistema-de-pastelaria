@@ -911,7 +911,7 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="relative z-30 -mt-2 mb-[10px] min-h-[28px] overflow-visible rounded-md bg-[#FFF4C2] px-1 py-0.5 sm:mt-2 sm:min-h-[3.75rem] sm:rounded-none sm:bg-transparent sm:px-0 sm:py-0">
+                    <div className="relative z-30 -mt-2 mb-[10px] min-h-[28px] overflow-visible rounded-md bg-transparent px-1 py-0.5 sm:mt-2 sm:min-h-[3.75rem] sm:rounded-none sm:px-0 sm:py-0">
                       <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
