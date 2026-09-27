@@ -608,7 +608,7 @@ export default function Page() {
           <p className="text-sm font-bold uppercase tracking-[.2em] text-[#F5C518]">
             Finalizar pedido
           </p>
-<h1 className="mt-3 max-w-[18rem] font-sans text-3xl font-[1300] leading-[1.05] tracking-[-0.03em] text-[darkred] sm:text-4xl">
+<h1 className="mt-3 max-w-[19rem] font-serif text-3xl font-black leading-[1.05] tracking-[-0.025em] text-[darkred] sm:text-4xl">
             Preencha seus dados para preparar o pedido.
           </h1>
           <div className="mt-8 rounded-3xl border border-[#F5C518]/20 bg-white p-5 text-[#111111]">
@@ -911,7 +911,7 @@ export default function Page() {
                         }}
                       />
                     </div>
-                    <div className="relative z-30 -mt-2 mb-[10px] min-h-[28px] overflow-visible rounded-md bg-[#FFF4C2] px-1 py-0.5 sm:mt-2 sm:min-h-[3.75rem] sm:rounded-none sm:bg-transparent sm:px-0 sm:py-0">
+                    <div className="relative z-30 -mt-2 mb-[10px] min-h-[28px] overflow-visible rounded-md bg-transparent pt-[5px] sm:mt-2 sm:min-h-[3.75rem] sm:rounded-none">
                       <h2 className="font-serif text-[1rem] font-bold leading-tight text-[#111111] sm:text-xl">
                         {name}
                       </h2>
@@ -926,7 +926,7 @@ export default function Page() {
                         {price}
                       </strong>
                     </div>
-                    <div className="flex h-[42px] w-fit shrink-0 items-center justify-center self-start rounded-xl bg-[#FFF4C2] px-2 py-1.5 sm:px-3 sm:py-2">
+                    <div className="flex h-[42px] w-full shrink-0 items-center justify-center rounded-xl bg-[#FFF4C2] px-2 py-1.5 sm:w-fit sm:px-3 sm:py-2">
                       <div className="flex items-center gap-3">
                         <button type="button" aria-label={`Remover ${name}`} onClick={() => decreaseFromCart(name)} className="grid size-8 place-items-center rounded-full bg-[#D92D20] text-lg font-black text-white">−</button>
                         <strong className="min-w-5 text-center text-lg text-[#111111]">{quantityFor(name)}</strong>
