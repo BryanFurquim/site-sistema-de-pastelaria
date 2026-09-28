@@ -819,7 +819,7 @@ export default function Page() {
                   </div>
                   <div onWheel={handleHeroWheel} className="relative min-h-[360px] w-full overflow-hidden bg-[#F5C518] lg:min-h-[520px] lg:flex-1" style={{ backgroundColor: currentHero.color, transition: 'background-color 220ms ease' }} aria-label="Role o mouse para trocar o sabor do pastel">
                     <div className="pointer-events-none absolute inset-0"><img key={currentHero.image} src={currentHero.image} alt={`Pastel sabor ${currentHero.name}`} loading="eager" decoding="async" fetchPriority="high" className="hero-pastel-float absolute left-[76%] top-[46%] z-10 hidden h-[160px] w-[230px] lg:block -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] object-contain drop-shadow-[0_24px_14px_rgba(87,42,23,0.28)] lg:left-auto lg:right-[3%] lg:top-[calc(58%+200px)] lg:h-[450px] lg:w-[660px] lg:translate-x-0 lg:rotate-[-8deg]" /></div>
-                    <div className="absolute inset-x-0 bottom-[130px] z-20 lg:hidden">
+                    <div className="absolute inset-x-0 bottom-[145px] z-20 lg:hidden">
                       <LogoLoop
                         logos={heroSlides.map((slide) => ({ src: slide.image, alt: `Pastel sabor ${slide.name}` }))}
                         speed={70}
