@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   generator: 'v0.app',
 }
 
-export const viewport: Viewport = { colorScheme: 'light', themeColor: '#FFF4C2' }
+export const viewport: Viewport = { colorScheme: 'light dark', themeColor: '#F5C518' }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR" className="bg-[#FFF4C2]"><body className={`${dmSans.variable} ${fraunces.variable} ${sourceSans3.variable} ${ibmPlexSans.variable} ${roboto.variable} ${poppins.variable} ${playfair.variable} ${raleway.variable} ${ptSans.variable} ${spaceGrotesk.variable} ${ebGaramond.variable} ${karla.variable} ${rubik.variable} ${crimsonText.variable} font-sans antialiased`}>{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return <html lang="pt-BR" className="bg-[#F5C518]"><body className={`${dmSans.variable} ${fraunces.variable} ${sourceSans3.variable} ${ibmPlexSans.variable} ${roboto.variable} ${poppins.variable} ${playfair.variable} ${raleway.variable} ${ptSans.variable} ${spaceGrotesk.variable} ${ebGaramond.variable} ${karla.variable} ${rubik.variable} ${crimsonText.variable} font-sans antialiased`}>{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
 }
