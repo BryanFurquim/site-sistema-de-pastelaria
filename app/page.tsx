@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SitePreloader } from "@/components/site-preloader";
 import { ArrowRight, Moon, ShoppingBag, Sparkles, Sun } from "lucide-react";
+import LogoLoop from "@/components/logo-loop";
 
 const defaultProducts = [
   ["Carne", "Carne temperada.", "R$ 12,00"],
@@ -219,6 +220,14 @@ export default function Page() {
     });
   }, [heroFlavor]);
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const color = isDarkMode ? "#111111" : "#F5C518";
+    document.documentElement.style.backgroundColor = color;
+    document.body.style.backgroundColor = color;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", color);
+  }, [isDarkMode]);
+
   const [activeSavory, setActiveSavory] = useState("Carne");
   const [cart, setCart] = useState<string[]>([]);
   const [checkout, setCheckout] = useState(false);
@@ -402,10 +411,10 @@ export default function Page() {
       setFormError("Digite um telefone celular válido com DDD.");
       return;
     }
-    if (!/^\d+$/.test(tableValue)) {
-      setFormError("O número da mesa deve conter apenas números.");
-      return;
-    }
+  if (notificationPreference !== "ligacao" && !/^\d+$/.test(tableValue)) {
+  setFormError("O número da mesa deve conter apenas números.");
+  return;
+  }
     if (cart.length === 0) {
       setFormError("Adicione pelo menos um item à sacola.");
       return;
@@ -428,7 +437,7 @@ export default function Page() {
       .insert({
         customer_name: customerName.trim(),
         customer_phone: customerPhone.trim(),
-        table_number: tableNumber.trim(),
+        table_number: notificationPreference === "ligacao" ? null : tableNumber.trim(),
         notification_preference: notificationPreference,
         customer_comment: customerComment.trim() || null,
         items,
@@ -608,9 +617,15 @@ export default function Page() {
           <p className="text-sm font-bold uppercase tracking-[.2em] text-[#F5C518]">
             Finalizar pedido
           </p>
-<h1 className="mt-3 max-w-[19rem] font-serif text-3xl font-black leading-[1.05] tracking-[-0.025em] text-[darkred] sm:text-4xl">
-            Preencha seus dados para preparar o pedido.
-          </h1>
+<div className="relative mt-3 overflow-hidden rounded-[1.75rem] border-b-4 border-[#F5C518] bg-[#8F2418] px-5 py-5 text-[#FFF4C2] shadow-[0_8px_0_rgba(245,197,24,.2)] sm:px-7 sm:py-6">
+            <div className="pointer-events-none absolute -right-8 -top-10 size-28 rounded-full border-[16px] border-[#FFF4C2]/70" aria-hidden="true" />
+            <div className="pointer-events-none absolute -bottom-12 left-24 size-24 rounded-full border-[14px] border-[#D92D20]/15" aria-hidden="true" />
+            <p className="relative text-[0.65rem] font-black uppercase tracking-[0.24em] text-[#F5C518]">Pastel Boer</p>
+            <h1 className="relative mt-2 max-w-[19rem] font-sans text-2xl font-black uppercase leading-[1.05] tracking-[-0.035em] text-[#FFF4C2] sm:text-3xl">
+              Preencha seus dados para preparar o pedido.
+            </h1>
+            <p className="relative mt-2 max-w-[16rem] text-xs font-bold leading-4 text-[#FFF4C2]/80">Assim a cozinha já começa a preparar seu pastel.</p>
+          </div>
           <div className="mt-8 rounded-3xl border border-[#F5C518]/20 bg-white p-5 text-[#111111]">
             <div className="flex items-center justify-between">
               <h2 className="font-bold uppercase tracking-wider">Sua sacola</h2>
@@ -684,7 +699,7 @@ export default function Page() {
                 placeholder="(19) 99999-9999"
               />
             </label>
-            <label className="flex flex-col gap-2 font-bold">
+            {notificationPreference !== "ligacao" && <label className="flex flex-col gap-2 font-bold">
               Número da mesa
               <input
                 required
@@ -698,7 +713,7 @@ export default function Page() {
                 className="rounded-2xl border border-[#DDE4D9] bg-white px-4 py-4 font-normal text-[#111111] outline-none placeholder:text-[#6B7280] focus:border-[#D92D20] focus:ring-2 focus:ring-[#D92D20]/20"
                 placeholder="Ex.: 12"
               />
-            </label>
+            </label>}
             <fieldset className="flex flex-col gap-3">
               <legend className="font-bold">Como prefere ser avisado?</legend>
               <label
@@ -732,7 +747,7 @@ export default function Page() {
                 />
                 <span className="notification-icon">☎</span>
                 <span>
-                  <strong>Podem me ligar</strong>
+                  <strong>Vou retirar — podem me ligar</strong>
                   <small>Avise quando o pedido estiver pronto.</small>
                 </span>
                 <span className="notification-dot" />
@@ -811,8 +826,16 @@ export default function Page() {
                     <button onClick={() => setMenu(true)} className="mt-6 inline-flex items-center gap-3 border border-white bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#D92D20] transition hover:bg-[#D92D20] hover:text-white">Conheça nosso cardápio <ArrowRight size={16} /></button>
                   </div>
                   <div onWheel={handleHeroWheel} className="relative min-h-[360px] w-full overflow-hidden bg-[#F5C518] lg:min-h-[520px] lg:flex-1" style={{ backgroundColor: currentHero.color, transition: 'background-color 220ms ease' }} aria-label="Role o mouse para trocar o sabor do pastel">
-                    <div className="pointer-events-none absolute inset-0"><img key={currentHero.image} src={currentHero.image} alt={`Pastel sabor ${currentHero.name}`} loading="eager" decoding="async" fetchPriority="high" className="hero-pastel-float absolute left-[76%] top-[46%] z-10 h-[160px] w-[230px] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] object-contain drop-shadow-[0_24px_14px_rgba(87,42,23,0.28)] lg:left-auto lg:right-[3%] lg:top-[calc(58%+200px)] lg:h-[450px] lg:w-[660px] lg:translate-x-0 lg:rotate-[-8deg]" /></div>
-                    <div className="absolute bottom-[67px] left-1/2 z-20 flex -translate-x-1/2 items-center justify-center lg:hidden"><div className="pointer-events-auto flex gap-2"><button type="button" aria-label="Pastel anterior" onClick={() => setHeroFlavor((heroFlavor - 1 + heroSlides.length) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">←</button><button type="button" aria-label="Próximo pastel" onClick={() => setHeroFlavor((heroFlavor + 1) % heroSlides.length)} className="grid size-12 place-items-center rounded-full border border-[#8F1D1D] bg-[#B42323] text-2xl font-black leading-none text-white shadow-md transition hover:bg-[#8F1D1D] hover:text-white focus:outline-none focus:ring-2 focus:ring-white/80">→</button></div></div>
+                    <div className="pointer-events-none absolute inset-0"><img key={currentHero.image} src={currentHero.image} alt={`Pastel sabor ${currentHero.name}`} loading="eager" decoding="async" fetchPriority="high" className="hero-pastel-float absolute left-[76%] top-[46%] z-10 hidden h-[160px] w-[230px] lg:block -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] object-contain drop-shadow-[0_24px_14px_rgba(87,42,23,0.28)] lg:left-auto lg:right-[3%] lg:top-[calc(58%+200px)] lg:h-[450px] lg:w-[660px] lg:translate-x-0 lg:rotate-[-8deg]" /></div>
+                    <div className="absolute inset-x-0 bottom-[145px] z-20 lg:hidden">
+                      <LogoLoop
+                        logos={heroSlides.map((slide) => ({ src: slide.image, alt: `Pastel sabor ${slide.name}` }))}
+                        speed={70}
+                        logoHeight={175}
+                        gap={28}
+                        ariaLabel="Feed de pastéis"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

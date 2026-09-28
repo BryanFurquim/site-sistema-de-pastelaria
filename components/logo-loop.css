@@ -1,0 +1,34 @@
+.logo-loop {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.logo-loop__track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  will-change: transform;
+}
+
+.logo-loop__item {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+}
+
+.logo-loop__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-loop__track {
+    transform: none !important;
+  }
+}

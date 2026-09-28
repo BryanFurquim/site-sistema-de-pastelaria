@@ -28,7 +28,7 @@ export function SitePreloader() {
     let loaded = 0
     let finished = false
     let finishTimeout: number | undefined
-    const minimumVisibleTime = 5000
+    const minimumVisibleTime = 1600
     const startedAt = performance.now()
 
     const finishLoader = () => {
