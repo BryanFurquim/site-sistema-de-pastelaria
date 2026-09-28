@@ -220,6 +220,14 @@ export default function Page() {
     });
   }, [heroFlavor]);
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const color = isDarkMode ? "#111111" : "#F5C518";
+    document.documentElement.style.backgroundColor = color;
+    document.body.style.backgroundColor = color;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", color);
+  }, [isDarkMode]);
+
   const [activeSavory, setActiveSavory] = useState("Carne");
   const [cart, setCart] = useState<string[]>([]);
   const [checkout, setCheckout] = useState(false);
