@@ -131,12 +131,6 @@ export default function Page() {
   const [heroFlavor, setHeroFlavor] = useState(0);
   const heroSlides = [
     {
-      name: "Sensação",
-      description: "Chocolate cremoso com morangos frescos em cada mordida.",
-      image: "/products/hero-chocolate.png",
-      color: "#F5C518",
-    },
-    {
       name: "Carne com Queijo",
       description: "Carne temperada com queijo derretido.",
       image: "/products/hero-carne.png",
