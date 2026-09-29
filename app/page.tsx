@@ -767,8 +767,8 @@ export default function Page() {
   return (
     <>
       <SitePreloader />
-      <main className={`${menu ? "min-h-screen overflow-y-auto" : "h-screen overflow-hidden"} ${isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
-        <header className={`fixed top-0 z-50 flex h-[70px] w-full shrink-0 items-center justify-between px-3 py-[7px] lg:px-6 ${isDarkMode ? "bg-[#111111]" : "bg-[#F5C518]"}`}>
+      <main className={`${menu ? "min-h-screen overflow-y-auto" : "h-screen overflow-hidden"} ${menu && isDarkMode ? "bg-[#111111] text-[#FFF4C2]" : "bg-[#FFF4C2] text-[#111111]"}`}>
+        <header className={`fixed top-0 z-50 flex h-[70px] w-full shrink-0 items-center justify-between px-3 py-[7px] lg:px-6 ${menu && isDarkMode ? "bg-[#111111]" : "bg-[#F5C518]"}`}>
           <a href="#inicio" className="flex items-center gap-3">
             <span className="grid size-14 overflow-hidden rounded-2xl bg-white">
               <img
@@ -820,7 +820,7 @@ export default function Page() {
                   </div>
                   <div onWheel={handleHeroWheel} className="relative min-h-[360px] w-full overflow-hidden bg-[#F5C518] lg:min-h-[520px] lg:flex-1" style={{ backgroundColor: currentHero.color, transition: 'background-color 220ms ease' }} aria-label="Role o mouse para trocar o sabor do pastel">
                     <div className="pointer-events-none absolute inset-0"><img key={currentHero.image} src={currentHero.image} alt={`Pastel sabor ${currentHero.name}`} loading="eager" decoding="async" fetchPriority="high" className="hero-pastel-float absolute left-[76%] top-[46%] z-10 hidden h-[160px] w-[230px] lg:block -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] object-contain drop-shadow-[0_24px_14px_rgba(87,42,23,0.28)] lg:left-auto lg:right-[3%] lg:top-[calc(58%+200px)] lg:h-[450px] lg:w-[660px] lg:translate-x-0 lg:rotate-[-8deg]" /></div>
-                    <div className="absolute inset-x-0 bottom-[145px] z-20 lg:hidden">
+                    <div className="absolute inset-x-0 bottom-[125px] z-20 lg:hidden">
                       <LogoLoop
                         logos={heroSlides.map((slide) => ({ src: slide.image, alt: `Pastel sabor ${slide.name}` }))}
                         speed={70}
@@ -912,7 +912,7 @@ export default function Page() {
                 ([name, description, price, , , image_url]) => (
 <article
                     key={name}
-                    className={`flex h-[262px] flex-col rounded-[1.15rem] border p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none ${isDarkMode ? "border-[#F5C518]/20 bg-[#FFF4C2]" : "border-[#DDE4D9] bg-white"}`}
+                    className={`flex h-[262px] flex-col rounded-[1.15rem] border p-2 text-left shadow-[0_4px_0_rgba(90,26,22,.08)] transition hover:-translate-y-1 hover:border-[#D92D20] hover:shadow-lg sm:h-[400px] sm:rounded-2xl sm:p-3 sm:shadow-none ${isDarkMode ? "border-[#6B3A28]/60 bg-[#2B1A14]" : "border-[#DDE4D9] bg-white"}`}
                   >
                     <div className="flex h-[122px] shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white sm:h-32 sm:rounded-2xl">
                       <img
