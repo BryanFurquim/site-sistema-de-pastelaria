@@ -214,17 +214,16 @@ export default function Page() {
     });
   }, [heroFlavor]);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [activeSavory, setActiveSavory] = useState("Carne");
+  const [cart, setCart] = useState<string[]>([]);
+  const [checkout, setCheckout] = useState(false);
 
   useEffect(() => {
     const color = isDarkMode || checkout ? "#111111" : "#F5C518";
     document.documentElement.style.backgroundColor = color;
     document.body.style.backgroundColor = color;
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", color);
-  }, [isDarkMode]);
-
-  const [activeSavory, setActiveSavory] = useState("Carne");
-  const [cart, setCart] = useState<string[]>([]);
-  const [checkout, setCheckout] = useState(false);
+  }, [isDarkMode, checkout]);
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [tableNumber, setTableNumber] = useState("");
@@ -599,8 +598,8 @@ export default function Page() {
     );
   if (checkout)
     return (
-      <main className="checkout-page min-h-screen bg-[#111111] px-6 py-10 text-[#FFF4C2]">
-        <section className="mx-auto flex min-h-[80vh] w-full max-w-xl flex-col justify-center">
+<main className="checkout-page min-h-0 bg-[#111111] px-6 pb-5 pt-10 text-[#FFF4C2]">
+  <section className="mx-auto flex min-h-0 w-full max-w-xl flex-col justify-start">
           <button
             type="button"
             onClick={() => setCheckout(false)}
