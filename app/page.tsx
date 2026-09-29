@@ -777,7 +777,7 @@ export default function Page() {
                 className="h-full w-full object-contain"
               />
             </span>
-            <span className="text-2xl font-bold" style={{ fontFamily: "'Fredoka', sans-serif" }}>Pastel Boer</span>
+            <span className="text-2xl font-bold text-[#F1EFEC]" style={{ fontFamily: "'Fredoka', sans-serif" }}>Pastel Boer</span>
           </a>
           <nav className="hidden gap-8 text-sm font-bold lg:flex">
 
