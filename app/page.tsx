@@ -216,7 +216,7 @@ export default function Page() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const color = isDarkMode ? "#111111" : "#F5C518";
+    const color = isDarkMode || checkout ? "#111111" : "#F5C518";
     document.documentElement.style.backgroundColor = color;
     document.body.style.backgroundColor = color;
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", color);
