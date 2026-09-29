@@ -777,7 +777,7 @@ export default function Page() {
                 className="h-full w-full object-contain"
               />
             </span>
-            <span className="text-2xl font-bold text-[#F1EFEC]" style={{ fontFamily: "'Fredoka', sans-serif" }}>Pastel Boer</span>
+            <span className={`text-2xl font-bold ${isDarkMode ? "text-[#F1EFEC]" : "text-[#111111]"}`} style={{ fontFamily: "'Fredoka', sans-serif" }}>Pastel Boer</span>
           </a>
           <nav className="hidden gap-8 text-sm font-bold lg:flex">
 
@@ -861,7 +861,7 @@ export default function Page() {
               <div className="absolute -bottom-16 right-20 size-40 rounded-full border-[18px] border-[#D92D20]/20" aria-hidden="true" />
               <p className={`relative mb-3 text-xs font-bold uppercase tracking-[0.18em] ${isDarkMode ? "text-[#F5C518]" : "text-[#D92D20]"}`}>Pastel Boer</p>
               <h1 className="relative max-w-[620px] text-4xl font-extrabold uppercase leading-[0.95] tracking-[-0.04em] sm:text-6xl" style={{ fontFamily: "'Poppins', sans-serif" }}>
-                Escolha o seu favorito.
+                Deu fome? Vem de pastel!
               </h1>
             </div>
             <div
