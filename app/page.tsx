@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SitePreloader } from "@/components/site-preloader";
-import { ArrowRight, Moon, ShoppingBag, Sparkles, Sun } from "lucide-react";
+import { ArrowRight, MessageCircle, Moon, ShoppingBag, Sparkles, Sun } from "lucide-react";
 import LogoLoop from "@/components/logo-loop";
 
 const defaultProducts = [
@@ -1040,6 +1040,15 @@ export default function Page() {
             </div>
           </section>
         )}
+      <a
+        href="https://wa.me/5519989223497?text=Ol%C3%A1%2C%20quero%20pedir%20um%20pastel!"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Fale com o Pastel Boer pelo WhatsApp"
+        className="fixed bottom-5 right-5 z-[60] grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(0,0,0,.25)] transition hover:scale-105 hover:bg-[#1ebe5d] focus:outline-none focus:ring-4 focus:ring-[#25D366]/40"
+      >
+        <MessageCircle className="size-7" aria-hidden="true" />
+      </a>
       </main>
     </>
   );
