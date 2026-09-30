@@ -217,6 +217,8 @@ export default function Page() {
   const [activeSavory, setActiveSavory] = useState("Carne");
   const [cart, setCart] = useState<string[]>([]);
   const [checkout, setCheckout] = useState(false);
+  const [checkoutChoice, setCheckoutChoice] = useState(false);
+  const [paymentCheckout, setPaymentCheckout] = useState(false);
 
   useEffect(() => {
     const color = isDarkMode || checkout ? "#111111" : "#F5C518";
@@ -596,6 +598,42 @@ export default function Page() {
         </section>
       </main>
     );
+  if (paymentCheckout)
+    return (
+      <main className="checkout-page min-h-screen bg-[#111111] px-6 py-10 text-[#FFF4C2]">
+        <section className="mx-auto flex w-full max-w-xl flex-col">
+          <button type="button" onClick={() => { setPaymentCheckout(false); setCheckoutChoice(true); }} className="mb-8 self-start font-bold text-[#F5C518]">Voltar</button>
+          <p className="text-sm font-bold uppercase tracking-[.2em] text-[#F5C518]">Checkout de pagamento</p>
+          <div className="mt-4 rounded-[1.75rem] bg-[#F1EFEC] p-6 text-[#111111]">
+            <h1 className="font-serif text-3xl font-black">Pagamento do pedido</h1>
+            <p className="mt-2 text-sm text-[#5A1A16]">Escolha a forma de pagamento para retirar ou receber seu pedido.</p>
+            <div className="mt-6 grid gap-3">
+              <button type="button" className="rounded-2xl border-2 border-[#DDE4D9] bg-white px-4 py-4 text-left font-bold">Cartão de crédito ou débito <span className="block text-sm font-normal text-[#6B7280]">Checkout seguro (simulação)</span></button>
+              <button type="button" className="rounded-2xl border-2 border-[#DDE4D9] bg-white px-4 py-4 text-left font-bold">PIX <span className="block text-sm font-normal text-[#6B7280]">Pagamento instantâneo (simulação)</span></button>
+            </div>
+            <button type="button" className="mt-6 w-full rounded-2xl bg-[#8F2418] px-5 py-4 font-bold text-[#FFF4C2]">Continuar para pagamento</button>
+          </div>
+        </section>
+      </main>
+    );
+  if (checkout && checkoutChoice)
+    return (
+      <main className="checkout-page min-h-screen bg-[#111111] px-6 py-10 text-[#FFF4C2]">
+        <section className="mx-auto flex w-full max-w-xl flex-col">
+          <button type="button" onClick={() => { setCheckout(false); setCheckoutChoice(false); }} className="mb-8 self-start font-bold text-[#F5C518]">Voltar ao carrinho</button>
+          <p className="text-sm font-bold uppercase tracking-[.2em] text-[#F5C518]">Como você quer receber?</p>
+          <h1 className="mt-3 font-serif text-3xl font-black">Escolha a melhor opção para o seu pedido</h1>
+          <div className="mt-8 grid gap-4">
+            <button type="button" onClick={() => setCheckoutChoice(false)} className="rounded-3xl bg-[#F1EFEC] p-6 text-left text-[#111111] transition hover:-translate-y-1">
+              <strong className="block text-xl">Comer no local</strong><span className="mt-2 block text-sm text-[#5A1A16]">Faça seu pedido agora e pague no final.</span>
+            </button>
+            <button type="button" onClick={() => { setCheckoutChoice(false); setPaymentCheckout(true); }} className="rounded-3xl bg-[#8F2418] p-6 text-left text-[#FFF4C2] transition hover:-translate-y-1">
+              <strong className="block text-xl">Retirar / Entrega</strong><span className="mt-2 block text-sm text-[#FFF4C2]/80">Avance para o checkout de pagamento.</span>
+            </button>
+          </div>
+        </section>
+      </main>
+    );
   if (checkout)
     return (
 <main className="checkout-page min-h-0 bg-[#111111] px-6 pb-5 pt-10 text-[#FFF4C2]">
@@ -790,9 +828,14 @@ export default function Page() {
             type="button"
             aria-label={`Abrir sacola${cart.length > 0 ? ` com ${cart.length} item${cart.length === 1 ? "" : "s"}` : ""}`}
             title="Abrir sacola"
-            onClick={() =>
-              cart.length > 0 ? setCheckout(true) : setMenu(true)
-            }
+            onClick={() => {
+              if (cart.length > 0) {
+                setCheckout(true);
+                setCheckoutChoice(true);
+              } else {
+                setMenu(true);
+              }
+            }}
             className="relative grid size-11 place-items-center rounded-full bg-[#111111] text-white"
           >
             <ShoppingBag size={19} aria-hidden="true" />
@@ -974,8 +1017,11 @@ export default function Page() {
                   </strong>
                   <button
                     type="button"
-                    onClick={() => setCheckout(true)}
-                    className="rounded-full bg-[#F5C518] px-4 py-2 text-sm font-bold text-[#111111]"
+  onClick={() => {
+    setCheckout(true);
+    setCheckoutChoice(true);
+  }}
+  className="rounded-full bg-[#F5C518] px-4 py-2 text-sm font-bold text-[#111111]"
                   >
                     Confirmar pedido
                   </button>
