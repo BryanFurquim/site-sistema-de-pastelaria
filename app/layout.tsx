@@ -19,8 +19,30 @@ const rubik = Rubik({ subsets: ['latin'], variable: '--font-rubik' })
 const crimsonText = Crimson_Text({ weight: ['400', '600'], subsets: ['latin'], variable: '--font-crimson-text' })
 
 export const metadata: Metadata = {
-  title: 'Pastelaria Boer | pastelariaboer.vercel.app',
-  description: 'Pastéis crocantes, recheio generoso e sabor de tradição. Peça online ou visite o Pastel Boer em Americana - SP.',
+  metadataBase: new URL('https://pastelariaboer.vercel.app'),
+  title: {
+    default: 'Pastel Boer | Pastéis Artesanais em Americana',
+    template: '%s | Pastel Boer',
+  },
+  description: 'Peça pastéis crocantes, recheados e feitos na hora em Americana - SP. Confira o cardápio do Pastel Boer e faça seu pedido online.',
+  keywords: ['pastel em Americana', 'pastelaria em Americana', 'pastel artesanal', 'Pastel Boer', 'pedir pastel online'],
+  applicationName: 'Pastel Boer',
+  category: 'food',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_BR',
+    url: '/',
+    siteName: 'Pastel Boer',
+    title: 'Pastel Boer | Pastéis Artesanais em Americana',
+    description: 'Pastéis crocantes e recheados feitos na hora. Peça online em Americana - SP.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pastel Boer | Pastéis Artesanais em Americana',
+    description: 'Peça pastéis crocantes e recheados feitos na hora em Americana - SP.',
+  },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   generator: 'v0.app',
 }
 
