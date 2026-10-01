@@ -107,18 +107,22 @@ function OrdersModule({ orders, updateStatus }: { orders: Order[]; updateStatus:
 function SalesModule({ metrics, orders }: { metrics: { revenue: number; count: number; active: number; average: number }; orders: Order[] }) {
   const validOrders = orders.filter((order) => order.status !== 'cancelado')
   const today = new Date()
-  const currentMonthKey = today.toISOString().slice(0, 7)
-  const monthKeys = Array.from(new Set([currentMonthKey, ...validOrders.map((order) => order.created_at.slice(0, 7))])).sort((a, b) => b.localeCompare(a))
+  const toLocalDateKey = (value: string | Date) => {
+    const date = value instanceof Date ? value : new Date(value)
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+  }
+  const currentMonthKey = toLocalDateKey(today).slice(0, 7)
+  const monthKeys = Array.from(new Set([currentMonthKey, ...validOrders.map((order) => toLocalDateKey(order.created_at).slice(0, 7))])).sort((a, b) => b.localeCompare(a))
   const [selectedMonth, setSelectedMonth] = useState(currentMonthKey)
   const selectedMonthLabel = new Date(`${selectedMonth}-01T12:00:00`).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })
   const dailyData = Array.from({ length: 15 }, (_, index) => {
     const date = new Date(today)
     date.setHours(0, 0, 0, 0)
     date.setDate(today.getDate() - (14 - index))
-    const key = date.toISOString().slice(0, 10)
-    return { dia: date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }), valor: validOrders.filter((order) => order.created_at.slice(0, 10) === key).reduce((sum, order) => sum + Number(order.total), 0) }
+  const key = toLocalDateKey(date)
+  return { dia: date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }), valor: validOrders.filter((order) => toLocalDateKey(order.created_at) === key).reduce((sum, order) => sum + Number(order.total), 0) }
   })
-  const monthOrders = validOrders.filter((order) => order.created_at.slice(0, 7) === selectedMonth)
+  const monthOrders = validOrders.filter((order) => toLocalDateKey(order.created_at).slice(0, 7) === selectedMonth)
   const monthRevenue = monthOrders.reduce((sum, order) => sum + Number(order.total), 0)
   const productData = Object.values(monthOrders.flatMap((order) => order.items.map((item) => ({ nome: item.name, quantidade: Number(item.quantity), total: Number(item.quantity) * Number(item.unit_price || 0) }))).reduce<Record<string, { nome: string; quantidade: number; total: number }>>((acc, item) => { acc[item.nome] = acc[item.nome] ? { nome: item.nome, quantidade: acc[item.nome].quantidade + item.quantidade, total: acc[item.nome].total + item.total } : item; return acc }, {})).sort((a, b) => b.total - a.total).slice(0, 6)
   const productTotal = productData.reduce((sum, item) => sum + item.total, 0)
