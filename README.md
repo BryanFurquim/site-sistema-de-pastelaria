@@ -8,16 +8,6 @@ O projeto foi desenvolvido com foco em **experiência do usuário, organização
 
 ---
 
-## 🌐 Demonstração
-
-**Aplicação:**
-https://sistema-de-pastelaria.vercel.app/
-
-**Área administrativa:**
-`/admin`
-
----
-
 ## 📸 Visão geral
 
 ### Cardápio
