@@ -281,6 +281,51 @@ h3, h4, h5, h6 {
 .site-preloader-track span { display: block; height: 100%; width: 0; border-radius: 999px; background: #D92D20; box-shadow: 0 0 16px rgba(217, 45, 32, .8); }
 .site-preloader-percent { margin-top: .8rem; color: rgba(255, 244, 194, .65); font-size: .72rem; font-weight: 700; letter-spacing: .08em; }
 .site-preloader-percent span { padding: 0 .35rem; color: #D92D20; }
+@page {
+  size: A4;
+  margin: 16mm;
+}
+
+@media print {
+  body { background: #ffffff !important; color: #111111 !important; }
+  body * { visibility: hidden !important; }
+  .print-report-overlay,
+  .print-report-overlay * { visibility: visible !important; }
+  .print-report-overlay {
+    position: static !important;
+    display: block !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+  .print-report-overlay > section {
+    width: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    box-shadow: none !important;
+  }
+  .print-report-overlay > section > div:first-child {
+    border-bottom: 3px solid #8F2418;
+    padding-bottom: 12px;
+  }
+  .print-report-overlay > section > div:first-child p:first-child { color: #8F2418 !important; }
+  .print-report-overlay > section > div:first-child h2 { font-size: 28pt !important; }
+  .print-report-overlay > section > div:first-child p:last-child { color: #555555 !important; }
+  .print-report-overlay > section > div:nth-child(2) { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px !important; }
+  .print-report-overlay > section > div:nth-child(2) > div,
+  .print-report-overlay > section > div:nth-child(4) { border: 1px solid #d9d9d9; border-radius: 8px; background: #fafafa !important; }
+  .print-report-overlay > section > div:nth-child(2) strong { font-size: 18pt !important; }
+  .print-report-overlay > section h3 { margin-top: 28px !important; border-bottom: 1px solid #d9d9d9; padding-bottom: 8px; }
+  .print-report-overlay > section > div:nth-child(4) { padding: 0 14px; }
+  .print-report-overlay > section > div:nth-child(4) > div { border-color: #e5e5e5 !important; }
+  .print-report-overlay button { display: none !important; }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
