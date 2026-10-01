@@ -60,7 +60,6 @@ O sistema pode ser disponibilizado através de um **QR Code**, permitindo que o 
 | **Supabase**   | Banco de dados e serviços backend |
 | **HTML5**      | Estrutura da aplicação            |
 | **CSS3**       | Estilização e responsividade      |
-| **Vercel**     | Deploy e hospedagem               |
 
 ---
 
