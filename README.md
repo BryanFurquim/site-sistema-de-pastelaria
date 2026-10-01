@@ -221,16 +221,6 @@ site-sistema-de-pastelaria/
 
 ---
 
-# 🌍 Deploy
-
-A aplicação está hospedada na **Vercel**.
-
-Após configurar o projeto e conectar o repositório, a Vercel pode realizar o processo de build e disponibilizar a aplicação através de uma URL pública.
-
-**Produção:**
-
-https://sistema-de-pastelaria.vercel.app/
-
 ---
 
 # 🔒 Segurança
@@ -250,7 +240,7 @@ Além disso, as regras de acesso do banco devem ser configuradas adequadamente n
 
 # 📌 Objetivo do projeto
 
-Este projeto foi desenvolvido com o objetivo de aplicar conhecimentos de **desenvolvimento web, React, integração com banco de dados, criação de interfaces responsivas e desenvolvimento de uma aplicação baseada em um caso de uso real**.
+Este projeto foi desenvolvido com o objetivo de aplicar conhecimentos de **desenvolvimento web, React, integração com banco de dados, criação de interfaces responsivas e desenvolvimento de uma aplicação baseada em um caso de uso real onde o cliente tinha uma dor de organização e fluxos e fui e solucionei a dor dele**.
 
 Além da parte visual, o projeto envolve um fluxo completo:
 
@@ -286,4 +276,4 @@ Desenvolvedor em formação, focado em desenvolvimento web e construção de apl
 
 ## 📄 Licença
 
-Este projeto foi desenvolvido para fins de estudo, desenvolvimento e demonstração de habilidades técnicas.
+Este projeto foi desenvolvido para fins de venda, estudo, desenvolvimento e demonstração de habilidades técnicas.
